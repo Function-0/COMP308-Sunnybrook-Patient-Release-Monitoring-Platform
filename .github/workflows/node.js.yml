@@ -55,5 +55,6 @@ jobs:
         
     - name: Move production.js to config/env folder
       run: |
+        ls
         mv production.js config/env
     

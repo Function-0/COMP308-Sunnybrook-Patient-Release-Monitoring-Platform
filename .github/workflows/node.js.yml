@@ -1,0 +1,59 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [10.x, 12.x, 14.x, 15.x]
+#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+#     - uses: actions/checkout@v2
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: ${{ matrix.node-version }}
+
+    - name: Replace localhost target in react-client/package.json
+      uses: jacobtomlinson/gha-find-replace@master
+      with:
+        find: "localhost:5000"
+        replace: "localhost"
+        include: "react-client/package.json"
+        
+    - name: Create env production.js string
+      run: |
+        PRODUCTION_JSON_STR=$(cat << EOF
+        module.exports = {
+            db: ${{ secrets.MONGODB_CONNECTION_PRODUCTION }},
+            sessionSecret: 'developmentSessionSecret',
+            secretKey: 'real_secret'
+        };
+        EOF
+        )
+        echo "PRODUCTION_JSON_STR<<EOF" >> $GITHUB_ENV
+        echo "$PRODUCTION_JSON_STR" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
+        
+    - name: Create production.js for Production
+      uses: "finnp/create-file-action@master"
+      env:
+        FILE_NAME: "production.js"
+        FILE_DATA: ${{ env.PRODUCTION_JSON_STR }}
+        
+    - name: Move production.js to config/env folder
+      run: |
+        mv production.js config/env
+    

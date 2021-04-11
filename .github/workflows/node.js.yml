@@ -6,8 +6,6 @@ name: Node.js CI
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
@@ -15,6 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+      
+    - uses: chrnorm/deployment-action@releases/v1
+      name: Create GitHub deployment status
+      id: deployment
+      with:
+        token: "${{ github.token }}"
+        target_url: http://mechanicchecker.us-east-1.elasticbeanstalk.com/
+        environment_url: http://mechanicchecker.us-east-1.elasticbeanstalk.com/
+        description: "COMP308 Sunnybrook Website"
+        environment: comp308-sunnybrook
+    
     - name: Replace localhost target in react-client/package.json
       uses: jacobtomlinson/gha-find-replace@master
       with:
@@ -53,4 +64,26 @@ jobs:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "comp308-sunnybrook" #Must be unique in Heroku
         heroku_email: "ibrahimj789@gmail.com"
+          
+    - name: Update GitHub deployment status (success)
+      if: success()
+      uses: chrnorm/deployment-status@releases/v1
+      with:
+        token: "${{ github.token }}"
+        target_url: https://comp308-sunnybrook.herokuapp.com/
+        environment_url: https://comp308-sunnybrook.herokuapp.com/
+        description: "COMP308 Sunnybrook Website"
+        state: "success"
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+
+    - name: Update GitHub deployment status (failure)
+      if: failure()
+      uses: chrnorm/deployment-status@releases/v1
+      with:
+        token: "${{ github.token }}"
+        target_url: https://comp308-sunnybrook.herokuapp.com/
+        environment_url: https://comp308-sunnybrook.herokuapp.com/
+        description: "COMP308 Sunnybrook Website"
+        state: "failure"
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
     

@@ -2,7 +2,7 @@
 
 This is an application designed to help nurse practitioners to monitor patients during the first weeks of their release from the hospital and also to help the patients to monitor their daily activities.
 
-## Sunnybrook Patient Release Monitoring Platform Team
+## Sunnybrook Patient Release Monitoring Platform Team - 1
 
 The Sunnybrook Patient Release Monitoring Platform team is as follows:
 - Michael Asemota:

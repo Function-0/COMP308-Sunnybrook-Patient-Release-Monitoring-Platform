@@ -38,7 +38,7 @@ function ListArticles(props) {
 
   return (
     <div>
-      { data.length !== 0
+      { this.props && data.length > 0
         ? <div>
           {showLoading && <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>

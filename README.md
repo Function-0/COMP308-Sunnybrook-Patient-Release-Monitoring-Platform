@@ -28,7 +28,7 @@ The Sunnybrook Patient Release Monitoring Platform team is as follows:
 
 ## MongoDB Schema
 
-![image](https://user-images.githubusercontent.com/30096267/114316921-b0ce0200-9ad3-11eb-8516-4d23382f6783.png)
+![image](https://user-images.githubusercontent.com/30096267/114326345-5d26dd00-9b02-11eb-9501-4b226ad418c5.png)
 
 ## Figma UI Prototype
 

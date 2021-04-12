@@ -38,13 +38,13 @@ function ListArticles(props) {
 
   return (
     <div>
-      { data && data.length > 0
+      { data.length > 0
         ? <div>
           {showLoading && <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner> }
           <ListGroup>
-            {[data].map((item, idx) => (
+            {data.map((item, idx) => (
               <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}>{item.title}</ListGroup.Item>
             ))}
           </ListGroup>

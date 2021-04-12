@@ -6,9 +6,6 @@ import React, { Component }  from 'react';
 function Home(props)
 {
     return (
-        <div>
-            <img src="sunnybrook-logo.jpg"></img>
-        </div>
     );
 }
 

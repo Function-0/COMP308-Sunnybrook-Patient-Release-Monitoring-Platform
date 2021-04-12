@@ -119,11 +119,11 @@ exports.authenticate = function(req, res, next) {
 	//find the user with given username using static method findOne
 	User.findOne({username: username}, (err, user) => {
 			if (err) {
-				return next(err);
+				next(err);
 			} else {
 			console.log(user)
 			//compare passwords	
-			if(bcrypt.compareSync(password, user.password)) {
+			if (user && bcrypt.compareSync(password, user.password)) {
 				// Create a new token with the user id in the payload
   				// and which expires 300 seconds after issue
 				const token = jwt.sign({ id: user._id, username: user.username }, jwtKey, 

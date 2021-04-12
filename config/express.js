@@ -26,10 +26,6 @@ module.exports = function () {
         // app.use(express.static('/react-client/build'));
     } else if (process.env.NODE_ENV === 'production') {
         app.use(compress());
-        app.use(express.static('./react-client/build'));
-        app.get('*', (req, res) => {
-            res.sendFile(path.join(__dirname, '..', 'react-client', 'build', 'index.html'))
-        })
     }
     // Use the 'body-parser' and 'method-override' middleware functions
     app.use(bodyParser.urlencoded({
@@ -71,5 +67,12 @@ module.exports = function () {
     //to determine the location of the static folder
     //Configure static file serving
     // app.use(express.static('./public'));
+
+    if (process.env.NODE_ENV === 'production') {
+        app.use(express.static('./react-client/build'));
+        app.get('*', (req, res) => {
+            res.sendFile(path.join(__dirname, '..', 'react-client', 'build', 'index.html'))
+        })
+    }
     return app;
 };

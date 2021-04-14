@@ -1,5 +1,7 @@
 # Sunnybrook Patient Release Monitoring Platform
 
+The Sunnybrook Patient Release Monitoring Platform is live on this URL: https://comp308-sunnybrook.herokuapp.com/
+
 This is an application designed to help nurse practitioners to monitor patients during the first weeks of their release from the hospital and also to help the patients to monitor their daily activities.
 
 ## Sunnybrook Patient Release Monitoring Platform Team - 1

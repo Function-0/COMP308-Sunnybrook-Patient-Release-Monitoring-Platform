@@ -2,7 +2,6 @@
 
 # mongodb connection
 config/env/development.js
-config/env/production.js
 
 # dependencies
 /react-client/node_modules

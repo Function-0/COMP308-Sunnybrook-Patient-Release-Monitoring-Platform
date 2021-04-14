@@ -26,7 +26,6 @@ module.exports = function (app) {
     app.get('/signout', users.signout);
     app.get('/read_cookie', users.isSignedIn);
 
-
     //path to a protected page
 	app.get('/welcome',users.welcome);
     

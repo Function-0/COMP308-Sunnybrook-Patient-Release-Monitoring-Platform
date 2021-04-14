@@ -9,6 +9,7 @@ module.exports = function (app) {
   
     app.post('/vitalsigns', nurses.createVitalSign);
     app.get('/vitalsigns', patients.listVitals);
+    app.post('/setquote', nurses.createQuote);
 
 };
 

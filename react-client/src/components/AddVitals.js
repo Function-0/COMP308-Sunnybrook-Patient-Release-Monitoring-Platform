@@ -84,7 +84,7 @@ function AddVitals(props) {
     console.log(e);
     let firstNme = JSON.parse(e).firstName;
     console.log(firstNme);
-    //setVitals("Patients", e);
+    // setVitals();
     // setValue(e.firstName)
     // addvitals.Patients
   }

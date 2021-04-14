@@ -47,7 +47,7 @@ function App() {
           <Route render ={()=> < EditUser />} path="/edit/:id" />
           <Route render ={()=> < CreateUser />} path="/create" />
           <Route render ={()=> < ShowUser />} path="/show/:id" />
-          <Route render ={()=> < ShowArticle />} path="/shshowmyDailyInfo/:id" />
+          <Route render ={()=> < ShowArticle />} path="/showmyDailyInfo/:id" />
           <Route render ={()=> < EditArticle />} path="/editarticle/:id" />
 
       </div>

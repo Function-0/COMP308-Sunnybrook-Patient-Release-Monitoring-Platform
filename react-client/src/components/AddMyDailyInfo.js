@@ -11,7 +11,7 @@ function AddMyDailyInfo(props) {
     //
     const username = props.screen;
     console.log('props.screen',props.screen)
-    const [myDailyInfo, setMyDailyInfo] = useState({ _id: '', pulseRate: '', systolicBloodPressure: '', diastolicBloodPressure: '', weight: '', temperature: '',  respiratoryRate: '', username: '' });
+    const [myDailyInfo, setMyDailyInfo] = useState({ _id: '', heartRate: '', systolicBloodPressure: '', diastolicBloodPressure: '', weight: '', temperature: '',  respiratoryRate: '', username: '' });
     const [showLoading, setShowLoading] = useState(false);
     //
     const apiUrl = "/api/myDailyInfos"
@@ -19,7 +19,7 @@ function AddMyDailyInfo(props) {
     const saveMyDailyInfo = (e) => {
         setShowLoading(true);
         e.preventDefault();
-        const data = {pulseRate: myDailyInfo.pulseRate, systolicBloodPressure: myDailyInfo.systolicBloodPressure, diastolicBloodPressure: myDailyInfo.diastolicBloodPressure, weight:myDailyInfo.weight, temperature:myDailyInfo.temperature, respiratoryRate:myDailyInfo.respiratoryRate,  username: username };
+        const data = {heartRate: myDailyInfo.pulseRate, systolicBloodPressure: myDailyInfo.systolicBloodPressure, diastolicBloodPressure: myDailyInfo.diastolicBloodPressure, weight:myDailyInfo.weight, temperature:myDailyInfo.temperature, respiratoryRate:myDailyInfo.respiratoryRate,  username: username };
         //
         axios.post(apiUrl, data)
         .then((result) => {
@@ -48,17 +48,17 @@ function AddMyDailyInfo(props) {
             <Form onSubmit={saveMyDailyInfo}>
               <Form.Group>
                 <Form.Label> Pulse rate</Form.Label>
-                <Form.Control type="text" name="pulseRate" id="pulseRate" placeholder="Enter pulse rate" value={myDailyInfo.pulseRate} onChange={onChange} />
+                <Form.Control type="text" name="heartRate" id="heartRate" placeholder="Enter pulse rate" value={myDailyInfo.heartRate} onChange={onChange} />
               </Form.Group>
 
               <Form.Group>
                 <Form.Label> Systolic blood pressure</Form.Label>
-                <Form.Control as="text" rows="3" name="systolicBloodPressure" id="systolicBloodPressure" placeholder="Enter systolic blood pressure" value={myDailyInfo.systolicBloodPressure} onChange={onChange} />
+                <Form.Control as="text" rows="3" name="SBP" id="SBP" placeholder="Enter systolic blood pressure" value={myDailyInfo.SBP} onChange={onChange} />
               </Form.Group>
 
               <Form.Group>
                 <Form.Label> Diastolic blood pressure</Form.Label>
-                <Form.Control as="text" rows="3" name="diastolicBloodPressure" id="diastolicBloodPressure" placeholder="Enter diastolic blood pressure" value={myDailyInfo.diastolicBloodPressure} onChange={onChange} />
+                <Form.Control as="text" rows="3" name="DBP" id="DBP" placeholder="Enter diastolic blood pressure" value={myDailyInfo.DBP} onChange={onChange} />
               </Form.Group>
 
               <Form.Group>
@@ -75,6 +75,11 @@ function AddMyDailyInfo(props) {
                 <Form.Label> Respiration rate</Form.Label>
                 <Form.Control type="text" name="respiratoryRate" id="respiratoryRate" placeholder="Enter respiratory rate" value={myDailyInfo.respiratoryRate} onChange={onChange} />
               </Form.Group>
+
+             {/* <Form.Group>
+                <Form.Label> Patient</Form.Label>
+                <Form.Control type="text" name="Patients" id="Patients" placeholder="Enter Patients" value={myDailyInfo.Patients} onChange={onChange} />
+              </Form.Group> */}
                             
               <Button variant="primary" type="submit">
                 Save My Daily Info

@@ -22,12 +22,14 @@ function AddVitals(props) {
     weight: "",
     temperature: "",
     respiratoryRate: "",
-    // Patients: ""
+    //Patients: ""
   });
   const [showLoading, setShowLoading] = useState(false);
   const apiUrl = "/vitalsigns";
   const secondApiUrl = "/listpatients"
   const [data, setData] = useState([]);
+  const [value,setValue]=useState('');
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +62,7 @@ function AddVitals(props) {
         weight: addvitals.weight,
         temperature: addvitals.temperature,
         respiratoryRate: addvitals.respiratoryRate,
-        // Patients: ""
+        //Patients: addvitals.Patients
     };
     console.log(data);
     axios
@@ -73,10 +75,19 @@ function AddVitals(props) {
   };
 
   const onChange = (e) => {
+    console.log(e);
     e.persist();
     setVitals({ ...addvitals, [e.target.name]: e.target.value });
   };
 
+  const handleSelect=(e)=>{
+    console.log(e);
+    let firstNme = JSON.parse(e).firstName;
+    console.log(firstNme);
+    //setVitals("Patients", e);
+    // setValue(e.firstName)
+    // addvitals.Patients
+  }
   return (
     <div>
       <div>
@@ -144,11 +155,13 @@ function AddVitals(props) {
           </Form.Group>
           <Form.Group>
             <Form.Label>Patient</Form.Label>
-            <DropdownButton id="dropdown-basic-button" title="Choose Patient">
+            <DropdownButton id="dropdown-basic-button" title="Choose Patient"
+             onSelect={handleSelect}>
             {data.map((item, idx) => (
-              <Dropdown.Item key={idx} value={addvitals.Patients} onChange={onChange} href="#">{item.firstName}</Dropdown.Item>
+             <Dropdown.Item key={idx} eventKey={JSON.stringify(item)} value={item.firstName}>{item.firstName}</Dropdown.Item>
+
             ))}
-              
+             
             </DropdownButton>
           </Form.Group>
 

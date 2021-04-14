@@ -20,7 +20,7 @@ function CreateUser(props) {
     axios.post(apiUrl, data)
       .then((result) => {
         setShowLoading(false);
-        props.history.push('/login')
+        props.history.push('/')
       }).catch((error) => setShowLoading(false));
   };
 

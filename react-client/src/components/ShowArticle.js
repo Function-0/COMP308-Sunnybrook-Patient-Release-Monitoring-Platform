@@ -5,7 +5,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
 
-function ShowDailyInfos(props) {
+function ShowArticle(props) {
   console.log('props.match.params',props.match.params.id)
   const [data, setData] = useState({});
   const [showLoading, setShowLoading] = useState(true);
@@ -59,4 +59,4 @@ function ShowDailyInfos(props) {
   );
 }
 
-export default withRouter(ShowDailyInfos);
+export default withRouter(ShowArticle);

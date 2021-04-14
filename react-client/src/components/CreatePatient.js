@@ -8,19 +8,19 @@ import { withRouter } from 'react-router-dom';
 
 function CreateUser(props) {
   const [user, setUser] = useState({ _id: '', firstName: '', lastName: '', 
-                email: '',username: '',password: '' });
+                username: '',password: '' ,type:''});
   const [showLoading, setShowLoading] = useState(false);
-  const apiUrl = "/users";
+  const apiUrl = "/patients";
 
   const saveUser = (e) => {
     setShowLoading(true);
     e.preventDefault();
     const data = { firstName: user.firstName, lastName: user.lastName, 
-      email: user.email,username: user.username, password: user.password };
+      username: user.username, password: user.password,type:user.type };
     axios.post(apiUrl, data)
       .then((result) => {
         setShowLoading(false);
-        props.history.push('/show/' + result.data._id)
+        props.history.push('/login')
       }).catch((error) => setShowLoading(false));
   };
 
@@ -47,16 +47,16 @@ function CreateUser(props) {
             <Form.Control type="text" name="lastName" id="lastName" placeholder="Enter last name" value={user.lastName} onChange={onChange} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="text" name="email" id="email" rows="3" placeholder="Enter email" value={user.email} onChange={onChange} />
-          </Form.Group>
-          <Form.Group>
             <Form.Label>User Name</Form.Label>
             <Form.Control type="text" name="username" id="username" placeholder="Enter user name" value={user.username} onChange={onChange} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control type="text" name="password" id="password" placeholder="Enter password" value={user.password} onChange={onChange} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Type</Form.Label>
+            <Form.Control type="text" name="type" id="type" placeholder="Enter Type(Nurse/Patient)" value={user.type} onChange={onChange} />
           </Form.Group>
           
           <Button variant="primary" type="submit">

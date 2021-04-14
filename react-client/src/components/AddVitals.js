@@ -1,6 +1,6 @@
-import { useParams, withRouter } from "react-router-dom";
-
-import React, { Component, useReducer } from "react";
+import { withRouter } from "react-router-dom";
+import axios from 'axios';
+import React, { Component, useEffect, useState } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import {
   Form,
@@ -22,10 +22,33 @@ function AddVitals(props) {
     weight: "",
     temperature: "",
     respiratoryRate: "",
-    Patients: ""
+    // Patients: ""
   });
   const [showLoading, setShowLoading] = useState(false);
-  const apiUrl = "/addvitals";
+  const apiUrl = "/vitalsigns";
+  const secondApiUrl = "/listpatients"
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      axios.get(secondApiUrl)
+        .then(result => {
+          console.log('result.data:', result.data)
+          //check if the user has logged in
+          if(result.data.screen !== 'auth')
+          {
+            
+            console.log('data in if:', result.data )
+            setData(result.data);
+            setShowLoading(false);
+          }
+        }).catch((error) => {
+          console.log('error in fetchData:', error)
+        });
+      };  
+    fetchData();
+  }, []);
+
 
   const saveVitals = (e) => {
     setShowLoading(true);
@@ -37,20 +60,21 @@ function AddVitals(props) {
         weight: addvitals.weight,
         temperature: addvitals.temperature,
         respiratoryRate: addvitals.respiratoryRate,
-        Patients: ""
+        // Patients: ""
     };
+    console.log(data);
     axios
       .post(apiUrl, data)
       .then((result) => {
         setShowLoading(false);
-        props.history.push("/show/" + result.data._id);
+        // props.history.push("/show/" + result.data._id);
       })
       .catch((error) => setShowLoading(false));
   };
 
   const onChange = (e) => {
     e.persist();
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setVitals({ ...addvitals, [e.target.name]: e.target.value });
   };
 
   return (
@@ -62,14 +86,14 @@ function AddVitals(props) {
       </div>
 
       <Jumbotron>
-        <Form>
+        <Form onSubmit={saveVitals}>
           <Form.Group>
             <Form.Label> Heart Rate (Per Minute)</Form.Label>
             <Form.Control
               type="Number"
               name="heartRate"
               id="heartRate"
-              placeholder="Eg. 90"
+              placeholder="Eg. 90" value={addvitals.heartRate} onChange={onChange}
             />
           </Form.Group>
           <Form.Group>
@@ -78,7 +102,7 @@ function AddVitals(props) {
               type="Number"
               name="weight"
               id="weight"
-              placeholder="Eg. 210"
+              placeholder="Eg. 210" value={addvitals.weight} onChange={onChange}
             />
           </Form.Group>
           <Form.Group>
@@ -88,7 +112,7 @@ function AddVitals(props) {
               name="temperature"
               id="temperature"
               rows="3"
-              placeholder="Eg. 39.8"
+              placeholder="Eg. 39.8" value={addvitals.temperature} onChange={onChange}
             />
           </Form.Group>
           <Form.Group>
@@ -97,15 +121,34 @@ function AddVitals(props) {
               type="Number"
               name="respiratoryRate"
               id="respiratoryRate"
-              placeholder="Eg. 15"
+              placeholder="Eg. 15" value={addvitals.respiratoryRate} onChange={onChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Diastolic Blood Pressure</Form.Label>
+            <Form.Control
+              type="Number"
+              name="DBP"
+              id="DBP"
+              placeholder="Eg. 15" value={addvitals.DBP} onChange={onChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Systolic Blood Pressure</Form.Label>
+            <Form.Control
+              type="Number"
+              name="SBP"
+              id="SBP"
+              placeholder="Eg. 15" value={addvitals.SBP} onChange={onChange}
             />
           </Form.Group>
           <Form.Group>
             <Form.Label>Patient</Form.Label>
             <DropdownButton id="dropdown-basic-button" title="Choose Patient">
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            {data.map((item, idx) => (
+              <Dropdown.Item key={idx} value={addvitals.Patients} onChange={onChange} href="#">{item.firstName}</Dropdown.Item>
+            ))}
+              
             </DropdownButton>
           </Form.Group>
 

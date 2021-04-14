@@ -17,7 +17,9 @@ module.exports = function () {
     require('../app/models/user.server.model');
     // Load the 'Article' model 
     require('../app/models/article.server.model');
-
+    require('../app/models/Alerts');
+    require('../app/models/dailyInfos');
+    require('../app/models/dailyTips');
     require('../app/models/Nurse');
     require('../app/models/Patients');
     require('../app/models/vitalSigns');

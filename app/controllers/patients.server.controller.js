@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
 const jwtExpirySeconds = 300;
 const jwtKey =config.secretKey;
-
+const quote = require('mongoose').model('dailyTips');
 
 
 exports.listPatients = function (req, res) {
@@ -51,4 +51,18 @@ exports.vitalSignByPatientId = function (req, res, next, id) {
 			next();
 		}
 	});
+};
+
+exports.listQuote = function (req, res) {
+    quote.find().sort({_id:-1}).limit(1).exec((err, quote) => {
+    if (err) {
+        return res.status(400).send({
+            message: getErrorMessage(err)
+        });
+    } else {
+        res.status(200).json(quote);
+        console.log(quote)
+    }
+});
+
 };

@@ -31,18 +31,39 @@ exports.createVitalSign = function (req, res, next) {
 exports.createQuote = function (req, res, next) {
 
     // Create a new instance of the 'User' Mongoose model
-    var dailyQuote = new quote(req.body); //get data from React form
-    console.log("body: " + req.body.message);
+    var dailyQuote = new quote(); //get data from React form
+    console.log(req.body.id);
+
+
+
+
+
+    Patients.findById(req.body.id, (err, patient) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            if (patient) {
+                console.log("---------------------")
+                console.log(patient)
+                console.log("----------------------")
+                dailyQuote.Patients = patient;
+                dailyQuote.message = req.body.message;
+
+                dailyQuote.save((err, pract) => {
+                    if (err) {
+                        return res.status(500).send({
+                            message: "There was an Error Creating the practitioner.",
+                            err: err
+                        }).end();
+                    } 
+                        
+                    
+                });
+            }
+        }})
+    }
+
+            
 
     // Use the 'User' instance's 'save' method to save a new user document
-    dailyQuote.save(function (err) {
-        if (err) {
-            // Call the next middleware with an error message
-            return next(err);
-        } else {
-            // Use the 'response' object to send a JSON response
-            res.json(dailyQuote);
-            
-        }
-    });
-};
+   

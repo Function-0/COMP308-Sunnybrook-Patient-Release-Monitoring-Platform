@@ -2,6 +2,7 @@ import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import React, { Component, useEffect, useState } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
+
 import {
   Form,
   Button,
@@ -15,9 +16,8 @@ import {
 function AddQuote(props) {
 
   const [addQuote, setQuote] = useState({
-    _id: "",
     message: "",
-    //Patients: ""
+    patientId: ""
   });
 
   const [showLoading, setShowLoading] = useState(false);
@@ -53,9 +53,10 @@ function AddQuote(props) {
     e.preventDefault();
     const data = {
         message: addQuote.message,
+        id: addQuote.patientId
         //Patients: addQuote.Patients
     };
-    console.log(data);
+    console.log("look here", data);
     axios
       .post(apiUrl, data)
       .then((result) => {
@@ -73,8 +74,8 @@ function AddQuote(props) {
 
   const handleSelect=(e)=>{
     console.log(e);
-    let firstNme = JSON.parse(e).firstName;
-    console.log(firstNme);
+    let id = JSON.parse(e)._id;
+    setQuote({ ...addQuote, patientId: id })
 
   }
 
@@ -90,7 +91,7 @@ function AddQuote(props) {
         <Form onSubmit={saveQuote}>
 
           <Form.Group>
-            <Form.Label>Quote Of the Day</Form.Label>
+            <Form.Label>Quote Of the Day {addQuote.patientsId}</Form.Label>
             <Form.Control
               type="text"
               name="message"

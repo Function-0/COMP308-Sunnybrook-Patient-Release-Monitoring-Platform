@@ -27,6 +27,8 @@ import NurseLandingPage from './components/NurseLandingPage';
 import AddVitals from './components/AddVitals';
 import VitalSignsHistory from './components/VitalSignsHistory';
 import AddQuote from './components/AddQuote';
+import ViewQuote from './components/ViewQuote';
+
 
 //
 function App() {
@@ -48,6 +50,8 @@ function App() {
             <Nav.Link href="/addvitals">Add Vitals</Nav.Link>
             <Nav.Link href="/vitalsignshistory">Vital Signs History</Nav.Link>
             <Nav.Link href="/addquote">Add Quote</Nav.Link>
+            <Nav.Link href="/viewquote">View Quote</Nav.Link>
+
 
           </Nav>
         </Navbar.Collapse>
@@ -69,6 +73,7 @@ function App() {
           <Route render ={()=> < AddVitals />} path="/addvitals" />
           <Route render ={()=> < VitalSignsHistory />} path="/vitalsignshistory" />
           <Route render ={()=> < AddQuote />} path="/addquote" />
+          <Route render ={()=> < ViewQuote />} path="/viewquote" />
 
       </div>
 

@@ -9,8 +9,8 @@ function NurseLandingPage(props)
 
     return (
         <div>
-            <h2> COMP308 Emerging Technology</h2>
-            <h3>Welcome Back {useParams} </h3>
+            <img src={require=(process.env.PUBLIC_URL + "/sunnybrook-logo.jpg")}></img>
+            <h3>Welcome Back Nurse firstName lastName!</h3>
             
         </div>
     );

@@ -22,12 +22,13 @@ import ListArticles from "./components/ListArticles";
 import Home from './components/Home';
 import Login from './components/Login';
 import NurseLandingPage from './components/NurseLandingPage';
+import AddVitals from './components/AddVitals';
 //
 function App() {
 
   return (
     <Router>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="dark" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -37,6 +38,8 @@ function App() {
             <Nav.Link href="/listarticles">List of Courses</Nav.Link>
             <Nav.Link href="/create">Sign Up</Nav.Link>
             <Nav.Link href="/nurselanding">Nurse Landing</Nav.Link>
+            <Nav.Link href="/addvitals">Add Vitals</Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -52,6 +55,8 @@ function App() {
           <Route render ={()=> < ShowArticle />} path="/showarticle/:id" />
           <Route render ={()=> < EditArticle />} path="/editarticle/:id" />
           <Route render ={()=> < NurseLandingPage />} path="/nurselanding" />
+          <Route render ={()=> < AddVitals />} path="/addvitals" />
+
 
       </div>
 

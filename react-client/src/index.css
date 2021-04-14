@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:cadetblue;
 }
 
 code {
@@ -14,7 +13,6 @@ code {
 }
 
 form{
-  background-color: rgb(168, 169, 172);
   width: 40%;
   display: block;
   margin-left: 30%;

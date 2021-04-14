@@ -10,7 +10,7 @@ config/env/development.js
 .pnp.js
 
 /node_modules
-
+*/**/node_modules
 
 
 # testing

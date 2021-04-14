@@ -7,5 +7,7 @@ module.exports = function (app) {
   
     app.get('/listpatients', patients.listPatients);
 
+    app.post('/predicthepatitis', patients.predictHepatitis);
+
 };
 

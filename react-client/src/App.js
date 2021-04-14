@@ -23,6 +23,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import NurseLandingPage from './components/NurseLandingPage';
 import AddVitals from './components/AddVitals';
+import PredictHepatitis from './components/PredictHepatitis';
 //
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
             <Nav.Link href="/create">Sign Up</Nav.Link>
             <Nav.Link href="/nurselanding">Nurse Landing</Nav.Link>
             <Nav.Link href="/addvitals">Add Vitals</Nav.Link>
+            <Nav.Link href="/predicthepatitis">Predict Hepatitis</Nav.Link>
 
           </Nav>
         </Navbar.Collapse>
@@ -56,7 +58,7 @@ function App() {
           <Route render ={()=> < EditArticle />} path="/editarticle/:id" />
           <Route render ={()=> < NurseLandingPage />} path="/nurselanding" />
           <Route render ={()=> < AddVitals />} path="/addvitals" />
-
+          <Route render ={()=> < PredictHepatitis />} path="/predicthepatitis" />
 
       </div>
 

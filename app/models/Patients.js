@@ -26,10 +26,6 @@ const PatientSchema = new Schema({
             (password) => password && password.length > 6,
             "Password should be longer",
         ],
-    },
-    type:{
-        type:String,
-        required: "Please specify type"
     }
 });
 // Set the 'fullname' virtual property

@@ -21,3 +21,34 @@ exports.listPatients = function (req, res) {
     }
 });
 };
+
+exports.listVitals = function (req, res) {
+    vitalSign.find().exec((err, vitals) => {
+    if (err) {
+        return res.status(400).send({
+            message: getErrorMessage(err)
+        });
+    } else {
+        res.status(200).json(vitals);
+        console.log(vitals)
+    }
+});
+};
+
+exports.vitalSignByPatientId = function (req, res, next, id) {
+	// Use the 'User' static 'findOne' method to retrieve a specific user
+	vitalSign.findOne({
+        _id: id
+	}, (err, user) => {
+		if (err) {
+			// Call the next middleware with an error message
+			return next(err);
+		} else {
+			// Set the 'req.user' property
+            req.user = user;
+            console.log(user);
+			// Call the next middleware
+			next();
+		}
+	});
+};

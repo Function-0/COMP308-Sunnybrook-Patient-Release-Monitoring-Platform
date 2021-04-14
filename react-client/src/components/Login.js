@@ -14,6 +14,7 @@ function App() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const apiUrl = "/signin";
+  const apiUrl2 = "/psignin"
   //send username and password to the server
   // for initial authentication
   const auth = async () => {
@@ -25,6 +26,9 @@ function App() {
       //call api
       const res = await axios.post(apiUrl, loginData);
       console.log(res.data.auth)
+      if(res.data.screen == null){
+        window.alert("Incorrect Login");
+      }
       console.log(res.data.screen)
       //process the response
       if (res.data.screen !== undefined) {
@@ -33,6 +37,30 @@ function App() {
       }
     } catch (e) { //print the error
       console.log(e);
+    }
+  
+  };
+  const authPat = async () => {
+    console.log('calling auth')
+    console.log(username)
+    try {
+      //make a get request to /authenticate end-point on the server
+      const loginData = { auth: { username, password } }
+      //call api
+      const res = await axios.post(apiUrl2, loginData);
+      console.log(res.data.auth)
+      if(res.data.screen == null){
+        window.alert("Incorrect Login");
+      }
+      console.log(res.data.screen)
+      //process the response
+      if (res.data.screen !== undefined) {
+        setScreen(res.data.screen);
+        console.log(res.data.screen);
+      }
+    } catch (e) { //print the error
+      console.log(e);
+      window.alert("Incorrect Login");
     }
   
   };
@@ -64,7 +92,8 @@ function App() {
     <div className="App">
       {screen === 'auth' 
         ? <div>
-          <label>Username: </label>
+          <img src="sunnybrook-logo.jpg" alt="Girl in a jacket" width="500" height="100" marginTop="250"></img>
+          <p><label>Username: </label>
           <br/>
           <input type="text" onChange={e => setUsername(e.target.value)} />
           <br/>
@@ -72,7 +101,9 @@ function App() {
           <br/>
           <input type="password" onChange={e => setPassword(e.target.value)} />
           <br/>
-          <button onClick={auth}>Login</button>
+          <button style={{marginRight: '5px',marginTop:'10px',backgroundColor:"#4CAF50",height:"40px",width:"270px"}} onClick={auth}>Login as a Nurse</button>
+          <button style={{marginRight: '5px',marginTop:'10px',backgroundColor:"#4CAF50",height:"40px",width:"270px"}} onClick={authPat}>Login as a Patient</button>
+          </p>
         </div>
         : <View screen={screen} setScreen={setScreen} />
       }

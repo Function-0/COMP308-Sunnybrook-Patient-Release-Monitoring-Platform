@@ -1,33 +1,33 @@
-﻿// Load the 'users' controller
-var users = require('../../app/controllers/users.server.controller');
+// Load the 'users' controller
+var Patients = require('../../app/controllers/patientSignUp');
 var express = require('express');
 var router = express.Router();
 // Define the routes module' method
 module.exports = function (app) {
     // handle a get request made to /users path
     // and list users when /users link is selected
-    app.get("/users",users.requiresLogin,users.list); //go to http://localhost:3000/users to see the list
+    app.get("/patients",Patients.requiresLogin,Patients.list); //go to http://localhost:3000/users to see the list
     //handle a post request made to root path
-    app.post('/users', users.create);
+    app.post('/patients', Patients.create);
     //
     // Set up the 'users' parameterized routes 
-	app.route('/users/:userId')
-    .get(users.read)
-    .put(users.update)
-    .delete(users.delete)
+	app.route('/patients/:userId')
+    .get(Patients.read)
+    .put(Patients.update)
+    .delete(Patients.delete)
     // Set up the 'userId' parameter middleware
     //All param callbacks will be called before any handler of 
     //any route in which the param occurs, and they will each 
     //be called only once in a request - response cycle, 
     //even if the parameter is matched in multiple routes
-    app.param('userId', users.userByID);
+    app.param('userId', Patients.userByID);
     //authenticate user
-    app.post('/lsignin', users.authenticate);
-    app.get('/lsignout', users.signout);
-    app.get('/lread_cookie', users.isSignedIn);
+    app.post('/psignin', Patients.authenticate);
+    app.get('/psignout', Patients.signout);
+    app.get('/pread_cookie', Patients.isSignedIn);
 
     //path to a protected page
-	app.get('/lwelcome',users.welcome);
+	app.get('/pwelcome',Patients.welcome);
     
 };
 

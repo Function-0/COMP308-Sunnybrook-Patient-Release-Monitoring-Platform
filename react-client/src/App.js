@@ -15,10 +15,12 @@ import List from './components/List';
 import EditUser from './components/EditUser';
 import EditArticle from './components/EditArticle';
 
-import CreateUser from './components/CreateUser';
+import CreateUser from './components/CreatePatient';
+import CreateNurse from './components/CreateNurse'
 import ShowUser from './components/ShowUser';
 import ShowArticle from './components/ShowArticle';
 import ListArticles from "./components/ListArticles";
+import showNurse from "./components/showNurse"
 import Home from './components/Home';
 import Login from './components/Login';
 //
@@ -32,9 +34,8 @@ function App() {
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/list">List of Students</Nav.Link>
-            <Nav.Link href="/listarticles">List of Courses</Nav.Link>
-            <Nav.Link href="/create">Sign Up</Nav.Link>
+            <Nav.Link href="/create">Sign Up Patients</Nav.Link>
+            <Nav.Link href="/createNurse">Sign Up Nurses</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -46,8 +47,14 @@ function App() {
           <Route render={() => <ListArticles />} path="/listarticles" />
           <Route render ={()=> < EditUser />} path="/edit/:id" />
           <Route render ={()=> < CreateUser />} path="/create" />
+          <Route render ={()=> < CreateNurse />} path="/createNurse" />
           <Route render ={()=> < ShowUser />} path="/show/:id" />
+<<<<<<< HEAD
           <Route render ={()=> < ShowArticle />} path="/showmyDailyInfo/:id" />
+=======
+          <Route render ={()=> < showNurse />} path="/showNurse/:id" />
+          <Route render ={()=> < ShowArticle />} path="/showarticle/:id" />
+>>>>>>> main
           <Route render ={()=> < EditArticle />} path="/editarticle/:id" />
 
       </div>

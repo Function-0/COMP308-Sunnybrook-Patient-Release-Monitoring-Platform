@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 
 function CreateUser(props) {
   const [user, setUser] = useState({ _id: '', firstName: '', lastName: '', 
-                username: '',password: '',type:'' });
+                username: '',password: '' });
   const [showLoading, setShowLoading] = useState(false);
   const apiUrl = "/Nurses/";
 
@@ -16,11 +16,11 @@ function CreateUser(props) {
     setShowLoading(true);
     e.preventDefault();
     const data = { firstName: user.firstName, lastName: user.lastName, 
-      username: user.username, password: user.password,type:user.type };
+      username: user.username, password: user.password };
     axios.post(apiUrl, data)
       .then((result) => {
         setShowLoading(false);
-        props.history.push('/login')
+        props.history.push('/')
       }).catch((error) => setShowLoading(false));
   };
 
@@ -54,11 +54,6 @@ function CreateUser(props) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="text" name="password" id="password" placeholder="Enter password" value={user.password} onChange={onChange} />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Type</Form.Label>
-            <Form.Control type="text" name="type" id="type" placeholder="Enter Type(Nurse/Patient)" value={user.type} onChange={onChange} />
-          </Form.Group>
-          
           <Button variant="primary" type="submit">
             Save
           </Button>

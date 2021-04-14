@@ -26,7 +26,7 @@ function App() {
       //call api
       const res = await axios.post(apiUrl, loginData);
       console.log(res.data.auth)
-      if(res.data.auth == undefined){
+      if(res.data.screen == null){
         window.alert("Incorrect Login");
       }
       console.log(res.data.screen)
@@ -49,6 +49,9 @@ function App() {
       //call api
       const res = await axios.post(apiUrl2, loginData);
       console.log(res.data.auth)
+      if(res.data.screen == null){
+        window.alert("Incorrect Login");
+      }
       console.log(res.data.screen)
       //process the response
       if (res.data.screen !== undefined) {

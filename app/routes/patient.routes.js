@@ -24,7 +24,7 @@ module.exports = function (app) {
     //authenticate user
     app.post('/psignin', Patients.authenticate);
     app.get('/psignout', Patients.signout);
-    app.get('/read_cookie', Patients.isSignedIn);
+    app.get('/pread_cookie', Patients.isSignedIn);
 
     //path to a protected page
 	app.get('/pwelcome',Patients.welcome);

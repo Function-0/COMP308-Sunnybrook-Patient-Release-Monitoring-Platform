@@ -30,7 +30,7 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href="/list">List of Students</Nav.Link>
             <Nav.Link href="/listarticles">List of Courses</Nav.Link>
@@ -40,7 +40,7 @@ function App() {
       </Navbar>
     
       <div>          
-          <Route render ={()=> < Home />} path="/home" />
+          <Route render ={()=> < Home />} path="/" />
           <Route render ={()=> < Login />} path="/login" />
           <Route render ={()=> < List />} path="/list" />
           <Route render={() => <ListArticles />} path="/listarticles" />

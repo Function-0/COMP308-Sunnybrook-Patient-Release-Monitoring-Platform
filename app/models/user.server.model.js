@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 //
 // Define a new 'UserSchema'
 var UserSchema = new Schema({
-    firstName: { type: Number, enum: [1, 2]},
+  firstName: String,
 	lastName: String,
 	email: {
 		type: String,

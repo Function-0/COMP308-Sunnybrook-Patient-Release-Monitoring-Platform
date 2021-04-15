@@ -49,4 +49,5 @@ vitalSignsSchema.set("toJSON", {
     virtuals: true,
 });
 
+// Create the 'HeatlhPractitioner' model out of the 'HeatlhPractitionerSchema'
 mongoose.model("vitalSigns", vitalSignsSchema);

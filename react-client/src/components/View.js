@@ -1,4 +1,5 @@
 import CreateArticle from './CreateArticle';
+import CreateAlert from './CreateAlert';
 import React, { useState } from 'react';
 //
 import axios from 'axios';
@@ -46,21 +47,35 @@ function View (props) {
     setArticle('y')
 
   }
+
+  cons motivationVideo = () => {
+    setArticle('video')
+  }
+
+  const createAlert = () => {
+    setArticle('alert')
+  }
+  
   //
   return (
     <div className="App">
-      {article !== 'y'
-        ? <div>
-            <p>user {screen}</p>
-            <p>data {data}</p>
-            <button onClick={verifyCookie}>Verify Cookie</button>
-            <button onClick={createArticle}>Create Course</button>
-            <button onClick={listArticles(data)}>List of Courses</button>
 
+     <div>
+            <p>{screen}</p>
+            <p>{data}</p>
+            <button onClick={verifyCookie}>Verify Cookie</button>
+            <button onClick={createArticle}>Create Artivle</button>
+            <button onClick={createAlert}>Create Alert</button>
+            <button onClick={listArticles(data)}>List of Courses</button>
             <button onClick={deleteCookie}>Log out</button>
-          </div>            
-        : <CreateArticle screen={screen} setScreen={setScreen} />
-      }
+            <button onClick={motivationVideo}>Motivation Video</button>
+          </div>   
+      {article === 'y' &&    
+       <CreateArticle screen={screen} setScreen={setScreen} />
+        }
+        {article === 'alert' &&
+       <CreateAlert screen={screen} setScreen={setScreen} />
+        }
     </div>
   );
 }

@@ -8,6 +8,43 @@ const jwtExpirySeconds = 300;
 const jwtKey =config.secretKey;
 const quote = require('mongoose').model('dailyTips');
 
+exports.createAlert = function (req, res, next) {
+
+    // Create a new instance of the 'User' Mongoose model
+    var dailyQuote = new quote(); //get data from React form
+    console.log(req.body.id);
+    Patients.findById(req.body.id, (err, patient) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            if (patient) {
+                dailyQuote.Patients = patient;
+                dailyQuote.message = req.body.message;
+                dailyQuote.save((err, pract) => {
+
+                    if (err) {
+
+                        return res.status(500).send({
+
+                            message: "There was an Error Creating the practitioner.",
+
+                            err: err
+
+                        }).end();
+
+                    } 
+
+                        
+
+                    
+
+                });
+
+            }
+
+        }})
+
+    }
 
 exports.listPatients = function (req, res) {
     Patients.find().exec((err, patients) => {
@@ -53,40 +90,25 @@ exports.vitalSignByPatientId = function (req, res, next, id) {
 	});
 };
 
-exports.listQuote = function (req, res) {
+
+exports.listQuote = function (req, res, next, id) {
    
     	// Use the 'User' static 'findOne' method to retrieve a specific user
-        var id = "dsafsdfsa"
-        console.log("id", id)
-        
-        // Patients.findById(req.cookies["id"], (err, patient) => {
-        //     if (err) {
-        //         return res.status(500).send(err).end();
-        //     } else {
-
-        //         quote.findOne()({
-        //             Patients: patient
-        //         }, (err, quote) => {
-        //             if (err) {
-        //                 console.log(err)
-        //                 // Call the next middleware with an error message
-        //                 return next(err);
-        //             } else {
-        //                 // Set the 'req.user' property
-        //                 req.quote = quote;
-        //                 console.log(quote);
-        //                 res.status(200).send({"quote": quote.message});
-
-        //                 // Call the next middleware
-        //                 next();
-        //             }
-                
-        //         })
-            
-//             }
+	quote.findOne({
+        Patients: id
+	}, (err, quote) => {
+		if (err) {
+			// Call the next middleware with an error message
+			return next(err);
+		} else {
+			// Set the 'req.user' property
+            req.quote = quote;
+            console.log(quote);
+			// Call the next middleware
+			next();
+		}
+	});
 
 
+};
 
-
-// })
-}

@@ -7,7 +7,7 @@ module.exports = function (app) {
   
     app.get('/listpatients', patients.listPatients);
     app.get('/getquote', patients.listQuote)
-    app.post('/makealert', patients.makeAlert)
+    app.post('/makealert', patients.createAlert)
 
 };
 

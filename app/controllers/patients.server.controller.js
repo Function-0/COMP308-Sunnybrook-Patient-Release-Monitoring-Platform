@@ -8,7 +8,6 @@ const jwtExpirySeconds = 300;
 const jwtKey =config.secretKey;
 const quote = require('mongoose').model('dailyTips');
 
-
 exports.createAlert = function (req, res, next) {
 
     // Create a new instance of the 'User' Mongoose model
@@ -91,6 +90,7 @@ exports.vitalSignByPatientId = function (req, res, next, id) {
 	});
 };
 
+
 exports.listQuote = function (req, res, next, id) {
    
     	// Use the 'User' static 'findOne' method to retrieve a specific user
@@ -110,5 +110,5 @@ exports.listQuote = function (req, res, next, id) {
 	});
 
 
-
 };
+

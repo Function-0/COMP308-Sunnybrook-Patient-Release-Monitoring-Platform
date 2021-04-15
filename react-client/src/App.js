@@ -23,12 +23,19 @@ import ListArticles from "./components/ListArticles";
 import showNurse from "./components/showNurse"
 import Home from './components/Home';
 import Login from './components/Login';
+import NurseLandingPage from './components/NurseLandingPage';
+import AddVitals from './components/AddVitals';
+import VitalSignsHistory from './components/VitalSignsHistory';
+import AddQuote from './components/AddQuote';
+import ViewQuote from './components/ViewQuote';
+
+
 //
 function App() {
 
   return (
     <Router>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="dark" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -36,6 +43,16 @@ function App() {
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href="/create">Sign Up Patients</Nav.Link>
             <Nav.Link href="/createNurse">Sign Up Nurses</Nav.Link>
+            <Nav.Link href="/list">List of Students</Nav.Link>
+            <Nav.Link href="/listarticles">List of Courses</Nav.Link>
+            <Nav.Link href="/create">Sign Up</Nav.Link>
+            <Nav.Link href="/nurselanding">Nurse Landing</Nav.Link>
+            <Nav.Link href="/addvitals">Add Vitals</Nav.Link>
+            <Nav.Link href="/vitalsignshistory">Vital Signs History</Nav.Link>
+            <Nav.Link href="/addquote">Add Quote</Nav.Link>
+            <Nav.Link href="/viewquote">View Quote</Nav.Link>
+
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -52,6 +69,11 @@ function App() {
           <Route render ={()=> < showNurse />} path="/showNurse/:id" />
           <Route render ={()=> < ShowArticle />} path="/showarticle/:id" />
           <Route render ={()=> < EditArticle />} path="/editarticle/:id" />
+          <Route render ={()=> < NurseLandingPage />} path="/nurselanding" />
+          <Route render ={()=> < AddVitals />} path="/addvitals" />
+          <Route render ={()=> < VitalSignsHistory />} path="/vitalsignshistory" />
+          <Route render ={()=> < AddQuote />} path="/addquote" />
+          <Route render ={()=> < ViewQuote />} path="/viewquote" />
 
       </div>
 

@@ -128,10 +128,13 @@ exports.authenticate = function(req, res, next) {
   				// and which expires 300 seconds after issue
 				const token = jwt.sign({ id: user._id, username: user.username }, jwtKey, 
 					{algorithm: 'HS256', expiresIn: jwtExpirySeconds });
-				console.log('token:', token)
+				console.log('token: ', token)
+				console.log('user id ', user._id)
+
+				res.cookie('id', user._id, { maxAge: 100000000});				
 				// set the cookie as the token string, with a similar max age as the token
 				// here, the max age is in milliseconds
-				res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000,httpOnly: true});
+				res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000,httpOnly: true}, user.username);
 				res.status(200).send({ screen: user.username });
 				//
 				//res.json({status:"success", message: "user found!!!", data:{user:
@@ -252,3 +255,4 @@ exports.requiresLogin = function (req, res, next) {
 	//call next function in line
     next();
 };
+

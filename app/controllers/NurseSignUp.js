@@ -129,6 +129,7 @@ exports.authenticate = function(req, res, next) {
 				const token = jwt.sign({ id: user._id, username: user.username }, jwtKey, 
 					{algorithm: 'HS256', expiresIn: jwtExpirySeconds });
 				console.log('token:', token)
+				res.cookie('id', user._id, { maxAge: 100000000});
 				// set the cookie as the token string, with a similar max age as the token
 				// here, the max age is in milliseconds
 				res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000,httpOnly: true});

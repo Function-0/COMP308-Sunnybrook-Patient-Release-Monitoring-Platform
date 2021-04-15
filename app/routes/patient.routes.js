@@ -1,5 +1,6 @@
 // Load the 'users' controller
 var Patients = require('../../app/controllers/patientSignUp');
+var DailyInfos = require('../../app/controllers/dailyInfos.server.controller');
 var express = require('express');
 var router = express.Router();
 // Define the routes module' method
@@ -28,6 +29,8 @@ module.exports = function (app) {
 
     //path to a protected page
 	app.get('/pwelcome',Patients.welcome);
+
+    app.post('/api/dailyInfos', DailyInfos.addDailyInfos)
     
 };
 

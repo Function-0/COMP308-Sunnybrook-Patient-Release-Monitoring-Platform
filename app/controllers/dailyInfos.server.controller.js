@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const patientRoutes = require('../routes/patient.routes');
 const DailyInfos = mongoose.model('dailyInfos');
 const User = require('mongoose').model('User');
+const Patient = require ('mongoose').model("Patients");
 
 //
 function getErrorMessage(err) {
@@ -14,105 +16,119 @@ function getErrorMessage(err) {
     }
 };
 //
-exports.create = function (req, res) {
-    const dailyInfos = new DailyInfos();
-    article.title = req.body.title;
-    article.content = req.body.content;
-    //article.creator = req.body.username;
-    console.log(req.body)
-    //
-    //
-    User.findOne({username: req.body.username}, (err, user) => {
-
-        if (err) { return getErrorMessage(err); }
-        //
-        req.id = user._id;
-        console.log('user._id',req.id);
-
-	
-    }).then( function () 
-    {
-        article.creator = req.id
-        console.log('req.user._id',req.id);
-
-        article.save((err) => {
-            if (err) {
-                console.log('error', getErrorMessage(err))
-
-                return res.status(400).send({
-                    message: getErrorMessage(err)
-                });
-            } else {
-                res.status(200).json(article);
-            }
-        });
+exports.addDailyInfos = function (req, res) {
     
-    });
+
+    var patientId = req.cookies["id"]
+
+    //article.creator = req.body.username;
+    console.log("================================")
+    console.log(req.body)
+    console.log("==========================")
+    
+    Patient.findById(patientId, (err, patient) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else  {
+            if (patient) {
+
+                const dailyInfos = new DailyInfos();
+                dailyInfos.heartRate = req.body.heartRate;
+                dailyInfos.SBP = req.body.SBP;
+                dailyInfos.DBP = req.body.DBP;
+                dailyInfos.DBP = req.body.DBP;
+                dailyInfos.weight = req.body.weight;
+                dailyInfos.temperature = req.body.temperature;
+                dailyInfos.respiratoryRate = req.body.respiratoryRate;
+
+                dailyInfos.Patients = patient;
+
+                dailyInfos.save((err) => {
+                    if (err) {
+                        console.log('error', getErrorMessage(err))
+        
+                        return res.status(400).send({
+                            message: getErrorMessage(err)
+                        });
+                    } else {
+                        res.status(200).json(dailyInfos);
+                    }
+                });
+
+            }
+        }
+    })
+
 };
 //
 exports.list = function (req, res) {
-    Article.find().sort('-created').populate('creator', 'firstName lastName fullName').exec((err, articles) => {
+    DailyInfos.find().sort('-created').populate('creator', 'firstName lastName fullName').exec((err, dailyInfoss) => {
 if (err) {
         return res.status(400).send({
             message: getErrorMessage(err)
         });
     } else {
-        res.status(200).json(articles);
+        res.status(200).json(dailyInfos);
     }
 });
 };
 //
-exports.articleByID = function (req, res, next, id) {
-    Article.findById(id).populate('creator', 'firstName lastName fullName').exec((err, article) => {if (err) return next(err);
-    if (!article) return next(new Error('Failed to load article '
+exports.dailyInfosByID = function (req, res, next, id) {
+    DailyInfos.findById(id).populate('creator', 'firstName lastName fullName').exec((err, dailyInfos) => {if (err) return next(err);
+    if (!dailyInfos) return next(new Error('Failed to load article '
             + id));
-        req.article = article;
-        console.log('in articleById:', req.article)
+        req.dailyInfos = dailyInfos;
+        console.log('in dailyInfosByID:', req.dailyInfos)
         next();
     });
 };
 //
 exports.read = function (req, res) {
-    res.status(200).json(req.article);
+    res.status(200).json(req.dailyInfos);
 };
 //
 exports.update = function (req, res) {
     console.log('in update:', req.article)
-    const article = req.article;
-    article.title = req.body.title;
-    article.content = req.body.content;
-    article.save((err) => {
+    const dailyInfos = req.dailyInfos;
+    dailyInfos.heartRate = req.body.heartRate;
+    dailyInfos.SBP = req.body.SBP;
+    dailyInfos.DBP = req.body.DBP;
+    dailyInfos.DBP = req.body.DBP;
+    dailyInfos.weight = req.body.weight;
+    dailyInfos.temperature = req.body.temperature;
+    dailyInfos.respiratoryRate = req.body.respiratoryRate;
+    dailyInfos.save((err) => {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
             });
         } else {
-            res.status(200).json(article);
+            res.status(200).json(dailyInfos);
         }
     });
 };
 //
 exports.delete = function (req, res) {
-    const article = req.article;
-    article.remove((err) => {
+    const dailyInfos = req.dailyInfos;
+    dailyInfos.remove((err) => {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
             });
         } else {
-            res.status(200).json(article);
+            res.status(200).json(dailyInfos);
         }
     });
 };
 //The hasAuthorization() middleware uses the req.article and req.user objects
 //to verify that the current user is the creator of the current article
 exports.hasAuthorization = function (req, res, next) {
-    console.log('in hasAuthorization - creator: ',req.article.creator)
+    console.log('in hasAuthorization - creator: ',req.dailyInfos.creator)
     console.log('in hasAuthorization - user: ',req.id)
     //console.log('in hasAuthorization - user: ',req.user._id)
 
 
-    if (req.article.creator.id !== req.id) {
+    if (req.dailyInfos.creator.id !== req.id) {
         return res.status(403).send({
             message: 'User is not authorized'
         });

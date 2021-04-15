@@ -1,4 +1,4 @@
-import CreateArticle from './CreateArticle';
+import AddMyDailyInfos from './AddMyDailyInfos';
 import React, { useState } from 'react';
 //
 import axios from 'axios';
@@ -59,7 +59,7 @@ function View (props) {
 
             <button onClick={deleteCookie}>Log out</button>
           </div>            
-        : <CreateArticle screen={screen} setScreen={setScreen} />
+        : <AddMyDailyInfos screen={screen} setScreen={setScreen} />
       }
     </div>
   );

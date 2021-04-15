@@ -49,7 +49,7 @@ function App() {
           <Route render ={()=> < CreateUser />} path="/create" />
           <Route render ={()=> < CreateNurse />} path="/createNurse" />
           <Route render ={()=> < ShowUser />} path="/show/:id" />
-          <Route render ={()=> < ShowDailyInfos/>} path="/showDailyInfos/:id" />
+          <Route render ={()=> < ShowDailyInfos/>} path="/showdailyInfos/:id" />
           <Route render ={()=> < showNurse />} path="/showNurse/:id" />
           {/* <Route render ={()=> < ShowArticle />} path="/showarticle/:id" /> */}
           <Route render ={()=> < EditArticle />} path="/editarticle/:id" />

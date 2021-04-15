@@ -48,7 +48,7 @@ function View (props) {
 
   }
 
-  cons motivationVideo = () => {
+  const motivationVideo = () => {
     setArticle('video')
   }
 

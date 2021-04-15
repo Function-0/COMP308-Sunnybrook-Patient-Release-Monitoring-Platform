@@ -24,7 +24,7 @@ function AddMyDailyInfos(props) {
         axios.post(apiUrl, data)
         .then((result) => {
             setShowLoading(false);
-            console.log('results from save My Daily Info:',result.data)
+            console.log('results from save Daily Info:',result.data)
             props.history.push('/showdailyInfos/' + result.data._id)
 
         }).catch((error) => setShowLoading(false));
@@ -37,7 +37,7 @@ function AddMyDailyInfos(props) {
     
     return (
         <div>
-        <h2> Add My Daily Info {username} </h2>
+        <h2> Add Daily Info {username} </h2>
         {showLoading && 
             <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
@@ -82,7 +82,7 @@ function AddMyDailyInfos(props) {
               </Form.Group> */}
                             
               <Button variant="primary" type="submit">
-                Save My Daily Infos
+                Save Daily Infos
               </Button>
 
             </Form>

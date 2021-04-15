@@ -7,7 +7,7 @@ const dailyTipsSchema = new Schema({
         required: "Message is required",
         trim: true
     },
-    Patients: {
+    account: {
         type: Schema.Types.ObjectId,
         ref: 'Patients'
     }

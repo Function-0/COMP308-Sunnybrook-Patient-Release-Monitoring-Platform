@@ -9,6 +9,5 @@ module.exports = function (app) {
     app.get('/getquote', patients.listQuote)
     app.post('/makealert', patients.makeAlert)
 
-
 };
 

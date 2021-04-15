@@ -11,6 +11,9 @@ function ViewQuote(props)
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        console.log("------------------------");
+
+        console.log(props.match.params.id);
         const fetchData = async () => {
           axios
             .get(apiUrl)
@@ -39,8 +42,8 @@ function ViewQuote(props)
             <h3>Quote of the day!</h3>
             {data.map((item, idx) => (
             <h3>{item.message}</h3>
-
             ))}
+
         </div>
     );
 

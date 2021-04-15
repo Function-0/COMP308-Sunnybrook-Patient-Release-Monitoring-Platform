@@ -54,15 +54,39 @@ exports.vitalSignByPatientId = function (req, res, next, id) {
 };
 
 exports.listQuote = function (req, res) {
-    quote.find().sort({_id:-1}).limit(1).exec((err, quote) => {
-    if (err) {
-        return res.status(400).send({
-            message: getErrorMessage(err)
-        });
-    } else {
-        res.status(200).json(quote);
-        console.log(quote)
-    }
-});
+   
+    	// Use the 'User' static 'findOne' method to retrieve a specific user
+        var id = "dsafsdfsa"
+        console.log("id", id)
+        
+        // Patients.findById(req.cookies["id"], (err, patient) => {
+        //     if (err) {
+        //         return res.status(500).send(err).end();
+        //     } else {
 
-};
+        //         quote.findOne()({
+        //             Patients: patient
+        //         }, (err, quote) => {
+        //             if (err) {
+        //                 console.log(err)
+        //                 // Call the next middleware with an error message
+        //                 return next(err);
+        //             } else {
+        //                 // Set the 'req.user' property
+        //                 req.quote = quote;
+        //                 console.log(quote);
+        //                 res.status(200).send({"quote": quote.message});
+
+        //                 // Call the next middleware
+        //                 next();
+        //             }
+                
+        //         })
+            
+//             }
+
+
+
+
+// })
+}

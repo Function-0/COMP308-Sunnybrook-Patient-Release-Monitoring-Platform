@@ -43,9 +43,7 @@ exports.createQuote = function (req, res, next) {
             return res.status(500).send(err).end();
         } else {
             if (patient) {
-                console.log("---------------------")
-                console.log(patient)
-                console.log("----------------------")
+              
                 dailyQuote.Patients = patient;
                 dailyQuote.message = req.body.message;
 

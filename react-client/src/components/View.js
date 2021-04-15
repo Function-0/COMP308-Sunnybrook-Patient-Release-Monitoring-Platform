@@ -51,8 +51,8 @@ function View (props) {
     <div className="App">
       {article !== 'y'
         ? <div>
-            <p>{screen}</p>
-            <p>{data}</p>
+            <p>user {screen}</p>
+            <p>data {data}</p>
             <button onClick={verifyCookie}>Verify Cookie</button>
             <button onClick={createArticle}>Create Course</button>
             <button onClick={listArticles(data)}>List of Courses</button>

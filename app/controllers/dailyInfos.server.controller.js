@@ -62,15 +62,19 @@ exports.addDailyInfos = function (req, res) {
 };
 //
 exports.list = function (req, res) {
-    DailyInfos.find().sort('-created').populate('creator', 'firstName lastName fullName').exec((err, dailyInfoss) => {
-if (err) {
-        return res.status(400).send({
-            message: getErrorMessage(err)
+ 
+        DailyInfos.find({}).populate({
+            path: 'Patients',
+            match: {'_id': mongo.Types.ObjectId(req.cookies.id)}
+        }).exec(function (err, test) {
+            console.log(test)
+    
+            res.send(test[test.length - 1].message);
         });
-    } else {
-        res.status(200).json(dailyInfos);
-    }
-});
+     
+      
+     
+    
 };
 //
 exports.dailyInfosByID = function (req, res, next, id) {

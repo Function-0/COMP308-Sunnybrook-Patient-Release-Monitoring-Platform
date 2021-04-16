@@ -5,10 +5,10 @@ import Spinner from 'react-bootstrap/Spinner';
 import { withRouter } from 'react-router-dom';
 import Login from './Login';
 
-function ListArticles(props) {
+function ListDailyInfos(props) {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
-  const apiUrl = "/api/articles";
+  const apiUrl = "/api/showdailyInfos";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ function ListArticles(props) {
 
   const showDetail = (id) => {
     props.history.push({
-      pathname: '/showarticle/' + id
+      pathname: '/showdailyInfos/' + id
     });
   }
 
@@ -56,4 +56,4 @@ function ListArticles(props) {
   );
 }
 //
-export default withRouter(ListArticles);
+export default withRouter(ListDailyInfos);

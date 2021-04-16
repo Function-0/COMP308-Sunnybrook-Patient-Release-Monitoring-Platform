@@ -27,6 +27,8 @@ module.exports = function (app) {
     app.get('/psignout', Patients.signout);
     app.get('/pread_cookie', Patients.isSignedIn);
 
+    app.get('/api/showdailyInfos',Patients.list);
+
     //path to a protected page
 	app.get('/pwelcome',Patients.welcome);
 

@@ -1,5 +1,6 @@
 import AddMyDailyInfos from './AddMyDailyInfos';
 import React, { useState } from 'react';
+import dailyInfos from './ListDailyInfos'
 //
 import axios from 'axios';
 //
@@ -8,8 +9,8 @@ function View (props) {
   const { screen, setScreen } = props;
   // return a stateful value and funcion to update it
   const [data, setData] = useState();
-  //
-  const [article, setArticle] = useState('');
+  
+  const [dailyInfos, setDailyInfos] = useState('');
   // called when user clicks on Logout button
   // to clear the cookie and set the screen state variable 
   // back to its initial state.
@@ -34,33 +35,32 @@ function View (props) {
     }
   }
   //
-  const listArticles = (username) => {
+  const listDailyInfos = (username) => {
 
-    console.log('in listCourses: ',username)
-    //setArticle('n')
+    console.log('in listDailyInfos: ',username)
+    setDailyInfos('n')
 
   }
   //
-  const createArticle = () => {
-    console.log('in createCourse')
-    setArticle('y')
+  const addMyDailyInfos = () => {
+    console.log('in addMyDailyInfos')
+    setDailyInfos('y')
 
   }
   //
   return (
     <div className="App">
-      {article !== 'y'
-        ? <div>
+       <div>
             <p>{screen}</p>
             <p>{data}</p>
             <button onClick={verifyCookie}>Verify Cookie</button>
-            <button onClick={createArticle}>Add Daily Infos</button>
-            <button onClick={listArticles(data)}>List of Courses</button>
+            <button onClick={addMyDailyInfos}>Add Daily Infos</button>
+
+            <button onClick={listDailyInfos(data)}>Daily Info History </button>
 
             <button onClick={deleteCookie}>Log out</button>
-          </div>            
-        : <AddMyDailyInfos screen={screen} setScreen={setScreen} />
-      }
+          </div>     
+         
     </div>
   );
 }

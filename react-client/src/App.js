@@ -19,7 +19,7 @@ import CreateUser from './components/CreatePatient';
 import CreateNurse from './components/CreateNurse'
 import ShowUser from './components/ShowUser';
 import ShowDailyInfos from './components/ShowDailyInfos';
-import ListArticles from "./components/ListArticles";
+import ListDailyInfos from "./components/ListDailyInfos";
 import showNurse from "./components/showNurse"
 import Home from './components/Home';
 import Login from './components/Login';
@@ -44,7 +44,7 @@ function App() {
           <Route render ={()=> < Home />} path="/" />
           <Route render ={()=> < Login />} path="/login" />
           <Route render ={()=> < List />} path="/list" />
-          <Route render={() => <ListArticles />} path="/listarticles" />
+          <Route render={() => <ListDailyInfos />} path="/listDailyInfos/:id" />
           <Route render ={()=> < EditUser />} path="/edit/:id" />
           <Route render ={()=> < CreateUser />} path="/create" />
           <Route render ={()=> < CreateNurse />} path="/createNurse" />

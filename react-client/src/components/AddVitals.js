@@ -22,7 +22,8 @@ function AddVitals(props) {
     weight: "",
     temperature: "",
     respiratoryRate: "",
-    //Patients: ""
+    //Patients: "",
+    PatientUserName: ""
   });
   const [showLoading, setShowLoading] = useState(false);
   const apiUrl = "/vitalsigns";
@@ -62,7 +63,8 @@ function AddVitals(props) {
         weight: addvitals.weight,
         temperature: addvitals.temperature,
         respiratoryRate: addvitals.respiratoryRate,
-        //Patients: addvitals.Patients
+        //Patients: addvitals.Patients,
+        PatientUserName: addvitals.PatientUserName
     };
     console.log(data);
     axios
@@ -82,12 +84,20 @@ function AddVitals(props) {
 
   const handleSelect=(e)=>{
     console.log(e);
-    let firstNme = JSON.parse(e).firstName;
-    console.log(firstNme);
-    // setVitals();
-    // setValue(e.firstName)
-    // addvitals.Patients
+    let id = JSON.parse(e)._id;
+    setVitals({ ...addvitals, Patients: id })
+ 
+    let username = JSON.parse(e).username;
+    console.log(username);
+    setVitals({ ...addvitals, PatientUserName: username })
   }
+
+  // const handleSelect=(e)=>{
+  //   console.log(e);
+  //   let id = JSON.parse(e)._id;
+  //   setQuote({ ...addQuote, patientId: id })
+  // }
+
   return (
     <div>
       <div>

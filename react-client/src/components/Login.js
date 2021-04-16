@@ -5,13 +5,22 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import NurseLandingPage from "./NurseLandingPage";
+import Views from "./View";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 
 //
 import View from './View'
 //
-function App() {
+function App(props) {
   //state variable for the screen, admin or user
   const [screen, setScreen] = useState('auth');
+  const [screen2,setScreens] = useState('auth2');
   //store input field data, user name and password
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -43,7 +52,7 @@ function App() {
   
   };
   const authPat = async () => {
-    console.log('calling auth')
+    console.log('calling auth2')
     console.log(username)
     try {
       //make a get request to /authenticate end-point on the server
@@ -51,14 +60,14 @@ function App() {
       //call api
       const res = await axios.post(apiUrl2, loginData);
       console.log(res.data.auth)
-      if(res.data.screen == null){
+      if(res.data.screen2 == null){
         window.alert("Incorrect Login");
       }
-      console.log(res.data.screen)
+      console.log(res.data.screen2)
       //process the response
-      if (res.data.screen !== undefined) {
-        setScreen(res.data.screen);
-        console.log(res.data.screen);
+      if (res.data.screen2 !== undefined) {
+        setScreens(res.data.screen2);
+        console.log(res.data.screen2);
       }
     } catch (e) { //print the error
       console.log(e);
@@ -84,10 +93,27 @@ function App() {
       console.log(e);
     }
   };
+  const readCookies = async () => {
+    try {
+      console.log('--- in readCookie function ---');
+
+      //
+      const res = await axios.get('/pread_cookie');
+      // 
+      if (res.data.screen2 !== undefined) {
+        setScreens(res.data.screen2);
+        console.log(res.data.screen2)
+      }
+    } catch (e) {
+      setScreens('auth2');
+      console.log(e);
+    }
+  };
   //runs the first time the view is rendered
   //to check if user is signed in
   useEffect(() => {
     readCookie();
+    readCookies();
   }, []); //only the first render
   //
   return (
@@ -103,12 +129,15 @@ function App() {
           <br/>
           <input type="password" onChange={e => setPassword(e.target.value)} />
           <br/>
+          
           <button style={{marginRight: '5px',marginTop:'10px',backgroundColor:"#4CAF50",height:"40px",width:"270px"}} onClick={auth}>Login as a Nurse</button>
-          <button style={{marginRight: '5px',marginTop:'10px',backgroundColor:"#4CAF50",height:"40px",width:"270px"}} onClick={authPat}>Login as a Patient</button>
           </p>
         </div>
-        : <NurseLandingPage screen={screen} setScreen={setScreen} />
-      }
+        : <NurseLandingPage screen={screen} setScreen={setScreen}/> 
+      }{screen2 === 'auth2'?
+      <button style={{marginRight: '5px',marginTop:'10px',backgroundColor:"#4CAF50",height:"40px",width:"270px"}} onClick={authPat}>Login as a Patient</button>
+        : <Views screen2={screen2} setScreen={setScreens}/>
+    }
     </div>
   );
 }

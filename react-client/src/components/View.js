@@ -16,8 +16,8 @@ function View (props) {
   // back to its initial state.
   const deleteCookie = async () => {
     try {
-      await axios.get('/signout');
-      setScreen('auth');
+      await axios.get('/psignout');
+      setScreen('auth2');
     } catch (e) {
       console.log(e);
     }
@@ -27,7 +27,7 @@ function View (props) {
   // of cookie specific response from the server.
   const verifyCookie = async () => {
     try {
-      const res = await axios.get('/welcome');
+      const res = await axios.get('/pwelcome');
       console.log(res.data)
       setData(res.data);
     } catch (e) {
@@ -66,7 +66,6 @@ function View (props) {
             <button onClick={verifyCookie}>Verify Cookie</button>
             <button onClick={createArticle}>Create Artivle</button>
             <button onClick={createAlert}>Create Alert</button>
-            <button onClick={listArticles(data)}>List of Courses</button>
             <button onClick={deleteCookie}>Log out</button>
             <button onClick={motivationVideo}>Motivation Video</button>
           </div>   

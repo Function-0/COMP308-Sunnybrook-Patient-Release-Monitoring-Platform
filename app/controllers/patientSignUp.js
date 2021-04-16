@@ -133,7 +133,7 @@ exports.authenticate = function(req, res, next) {
 				// set the cookie as the token string, with a similar max age as the token
 				// here, the max age is in milliseconds
 				res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000,httpOnly: true});
-				res.status(200).send({ screen: user.username });
+				res.status(200).send({ screen2: user.username });
 				//
 				//res.json({status:"success", message: "user found!!!", data:{user:
 				//user, token:token}});
@@ -200,7 +200,7 @@ exports.isSignedIn = (req, res) => {
 	console.log(token)
 	// if the cookie is not set, return 'auth'
 	if (!token) {
-	  return res.send({ screen: 'auth' }).end();
+	  return res.send({ screen2: 'auth2' }).end();
 	}
 	var payload;
 	try {
@@ -219,7 +219,7 @@ exports.isSignedIn = (req, res) => {
 	}
   
 	// Finally, token is ok, return the username given in the token
-	res.status(200).send({ screen: payload.username });
+	res.status(200).send({ screen2: payload.username });
 }
 
 //isAuthenticated() method to check whether a user is currently authenticated

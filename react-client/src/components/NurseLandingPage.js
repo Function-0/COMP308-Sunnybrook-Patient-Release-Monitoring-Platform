@@ -23,6 +23,10 @@ function NurseLandingPage(props) {
     setArticle("history");
   };
 
+  // const viewQuote = () => {
+  //   setArticle("history");
+  // };
+
   const deleteCookie = async () => {
     try {
       await axios.get("/signout");
@@ -42,6 +46,8 @@ function NurseLandingPage(props) {
         <button onClick={addVitals}>Add Vitals</button>
         <button onClick={vitalHistory}>Vital Signs History</button>
         <button onClick={deleteCookie}>Log out</button>
+        {/* <button onClick={viewQuote}>Vital Signs History</button> */}
+
       </div>
 
       {article === "quote" && (
@@ -53,6 +59,7 @@ function NurseLandingPage(props) {
       {article === "history" && (
         <VitalSignsHistory screen={screen} setScreen={setScreen} />
       )}
+   
     </div>
   );
 }

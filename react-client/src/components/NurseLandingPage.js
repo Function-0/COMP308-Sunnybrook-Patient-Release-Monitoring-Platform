@@ -1,52 +1,56 @@
 import { useParams, withRouter } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import AddQuote from "./AddQuote";
 import AddVitals from "./AddVitals";
 import VitalSignsHistory from "./VitalSignsHistory";
-
+import axios from 'axios';
 
 
 function NurseLandingPage(props) {
-    const { screen, setScreen } = props;
-    const [data, setData] = useState();
+  const { screen, setScreen } = props;
+  const [data, setData] = useState();
 
-    const [article, setArticle] = useState('');
+  const [article, setArticle] = useState("");
 
-    const addVitals = () => {
-        setArticle('vitals')
-    
-      }
-      const addQuote = () => {
-        setArticle('quote')
-    
-      }
+  const addVitals = () => {
+    setArticle("vitals");
+  };
+  const addQuote = () => {
+    setArticle("quote");
+  };
 
-      const vitalHistory = () => {
-        setArticle('history')
-    
-      }
+  const vitalHistory = () => {
+    setArticle("history");
+  };
+
+  const deleteCookie = async () => {
+    try {
+      await axios.get("/signout");
+      setScreen("auth");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="App">
-
-       <div>
+      <div>
         <p>{screen}</p>
         <p>{data}</p>
 
         <button onClick={addQuote}>Add Daily Quote</button>
         <button onClick={addVitals}>Add Vitals</button>
         <button onClick={vitalHistory}>Vital Signs History</button>
-        
-
-        <br></br>
-
+        <button onClick={deleteCookie}>Log out</button>
       </div>
-      
-       {article === "quote" && (
+
+      {article === "quote" && (
         <AddQuote screen={screen} setScreen={setScreen} />
-      )}{article === "vitals" && (
+      )}
+      {article === "vitals" && (
         <AddVitals screen={screen} setScreen={setScreen} />
-      )}{article === "history" && (
+      )}
+      {article === "history" && (
         <VitalSignsHistory screen={screen} setScreen={setScreen} />
       )}
     </div>

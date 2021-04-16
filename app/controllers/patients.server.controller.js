@@ -92,7 +92,7 @@ exports.vitalSignByPatientId = function (req, res, next, id) {
 };
 
 exports.listQuote = function (req, res, next, id) {
-   
+    console.log(req.cookies.id);
     	// Use the 'User' static 'findOne' method to retrieve a specific user
 	quote.findOne({
         Patients: id

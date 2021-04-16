@@ -4,6 +4,8 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import NurseLandingPage from "./NurseLandingPage";
+
 //
 import View from './View'
 //
@@ -33,7 +35,7 @@ function App() {
       //process the response
       if (res.data.screen !== undefined) {
         setScreen(res.data.screen);
-        console.log(res.data.screen);
+        console.log("screen Name: " + res.data.screen);
       }
     } catch (e) { //print the error
       console.log(e);
@@ -105,7 +107,7 @@ function App() {
           <button style={{marginRight: '5px',marginTop:'10px',backgroundColor:"#4CAF50",height:"40px",width:"270px"}} onClick={authPat}>Login as a Patient</button>
           </p>
         </div>
-        : <View screen={screen} setScreen={setScreen} />
+        : <NurseLandingPage screen={screen} setScreen={setScreen} />
       }
     </div>
   );

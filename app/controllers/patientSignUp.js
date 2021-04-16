@@ -117,6 +117,7 @@ exports.authenticate = function(req, res, next) {
 	console.log(password)
 	console.log(username)
 	//find the user with given username using static method findOne
+	
 	Patient.findOne({username: username}, (err, user) => {
 			if (err) {
 				next(err);

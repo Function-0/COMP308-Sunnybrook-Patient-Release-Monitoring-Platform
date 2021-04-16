@@ -13,7 +13,6 @@ function ViewQuote(props)
     useEffect(() => {
         console.log("------------------------");
 
-       
         const fetchData = async () => {
           axios
             .get(apiUrl)

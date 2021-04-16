@@ -1,4 +1,5 @@
-import AddMyDailyInfos from './AddMyDailyInfos';
+import CreateArticle from './CreateArticle';
+import CreateAlert from './CreateAlert';
 import React, { useState } from 'react';
 import dailyInfos from './ListDailyInfos'
 //
@@ -16,8 +17,8 @@ function View (props) {
   // back to its initial state.
   const deleteCookie = async () => {
     try {
-      await axios.get('/signout');
-      setScreen('auth');
+      await axios.get('/psignout');
+      setScreen('auth2');
     } catch (e) {
       console.log(e);
     }
@@ -27,7 +28,7 @@ function View (props) {
   // of cookie specific response from the server.
   const verifyCookie = async () => {
     try {
-      const res = await axios.get('/welcome');
+      const res = await axios.get('/pwelcome');
       console.log(res.data)
       setData(res.data);
     } catch (e) {
@@ -47,20 +48,34 @@ function View (props) {
     setDailyInfos('y')
 
   }
+
+  const motivationVideo = () => {
+    setArticle('video')
+  }
+
+  const createAlert = () => {
+    setArticle('alert')
+  }
+  
   //
   return (
     <div className="App">
-       <div>
+
+     <div>
             <p>{screen}</p>
             <p>{data}</p>
             <button onClick={verifyCookie}>Verify Cookie</button>
-            <button onClick={addMyDailyInfos}>Add Daily Infos</button>
-
-            <button onClick={listDailyInfos(data)}>Daily Info History </button>
-
+            <button onClick={createArticle}>Create Artivle</button>
+            <button onClick={createAlert}>Create Alert</button>
             <button onClick={deleteCookie}>Log out</button>
-          </div>     
-         
+            <button onClick={motivationVideo}>Motivation Video</button>
+          </div>   
+      {article === 'y' &&    
+       <CreateArticle screen={screen} setScreen={setScreen} />
+        }
+        {article === 'alert' &&
+       <CreateAlert screen={screen} setScreen={setScreen} />
+        }
     </div>
   );
 }

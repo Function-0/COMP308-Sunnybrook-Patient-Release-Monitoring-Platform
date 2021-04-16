@@ -117,6 +117,7 @@ exports.authenticate = function(req, res, next) {
 	console.log(password)
 	console.log(username)
 	//find the user with given username using static method findOne
+	
 	Patient.findOne({username: username}, (err, user) => {
 			if (err) {
 				next(err);
@@ -200,7 +201,7 @@ exports.isSignedIn = (req, res) => {
 	console.log(token)
 	// if the cookie is not set, return 'auth'
 	if (!token) {
-	  return res.send({ screen: 'auth' }).end();
+	  return res.send({ screen2: 'auth2' }).end();
 	}
 	var payload;
 	try {
@@ -219,7 +220,7 @@ exports.isSignedIn = (req, res) => {
 	}
   
 	// Finally, token is ok, return the username given in the token
-	res.status(200).send({ screen: payload.username });
+	res.status(200).send({ screen2: payload.username });
 }
 
 //isAuthenticated() method to check whether a user is currently authenticated

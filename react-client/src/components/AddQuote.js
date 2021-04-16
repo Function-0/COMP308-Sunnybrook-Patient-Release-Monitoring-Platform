@@ -76,7 +76,6 @@ function AddQuote(props) {
     console.log(e);
     let id = JSON.parse(e)._id;
     setQuote({ ...addQuote, patientId: id })
-
   }
 
   return (

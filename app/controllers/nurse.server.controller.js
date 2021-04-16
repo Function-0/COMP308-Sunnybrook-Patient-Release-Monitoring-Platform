@@ -1,6 +1,7 @@
 // Load the module dependencies
 const vitalSign = require('mongoose').model('vitalSigns');
 const quote = require('mongoose').model('dailyTips');
+const mongo = require('mongoose')
 
 const Patients = require('mongoose').model('Patients')
 const bcrypt = require('bcrypt');
@@ -43,11 +44,12 @@ exports.createQuote = function (req, res, next) {
             return res.status(500).send(err).end();
         } else {
             if (patient) {
-              
-                dailyQuote.Patients = patient;
+              console.log(patient);
+                dailyQuote.Patients = mongo.Types.ObjectId(req.body.id);
                 dailyQuote.message = req.body.message;
 
-                dailyQuote.save((err, pract) => {
+               
+                dailyQuote.save((err) => {
                     if (err) {
                         return res.status(500).send({
                             message: "There was an Error Creating the practitioner.",

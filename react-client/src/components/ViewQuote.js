@@ -39,9 +39,9 @@ function ViewQuote(props)
         <div>
             <img src={require=(process.env.PUBLIC_URL + "/sunnybrook-logo.jpg")}></img>
             <h3>Quote of the day!</h3>
-            {data.map((item, idx) => (
-            <h3>{item.message}</h3>
-            ))}
+
+            <h3>{data}</h3>
+      
 
         </div>
     );

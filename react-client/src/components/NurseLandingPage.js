@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import AddQuote from "./AddQuote";
 import AddVitals from "./AddVitals";
 import VitalSignsHistory from "./VitalSignsHistory";
+import ViewQuote from "./ViewQuote";
+
 import axios from 'axios';
 
 
@@ -23,9 +25,9 @@ function NurseLandingPage(props) {
     setArticle("history");
   };
 
-  // const viewQuote = () => {
-  //   setArticle("history");
-  // };
+  const viewQuote = () => {
+    setArticle("view");
+  };
 
   const deleteCookie = async () => {
     try {
@@ -46,7 +48,7 @@ function NurseLandingPage(props) {
         <button onClick={addVitals}>Add Vitals</button>
         <button onClick={vitalHistory}>Vital Signs History</button>
         <button onClick={deleteCookie}>Log out</button>
-        {/* <button onClick={viewQuote}>Vital Signs History</button> */}
+        <button onClick={viewQuote}>View Quote</button>
 
       </div>
 
@@ -58,6 +60,8 @@ function NurseLandingPage(props) {
       )}
       {article === "history" && (
         <VitalSignsHistory screen={screen} setScreen={setScreen} />
+      )}{article === "view" && (
+        <ViewQuote screen={screen} setScreen={setScreen} />
       )}
    
     </div>

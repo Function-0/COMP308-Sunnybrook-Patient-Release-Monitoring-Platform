@@ -7,7 +7,7 @@ const config = require('../../config/config');
 const jwtExpirySeconds = 300;
 const jwtKey =config.secretKey;
 const quote = require('mongoose').model('dailyTips');
-
+const mongo = require('mongoose')
 
 exports.createAlert = function (req, res, next) {
 
@@ -91,24 +91,19 @@ exports.vitalSignByPatientId = function (req, res, next, id) {
 	});
 };
 
-exports.listQuote = function (req, res, next, id) {
-    console.log(req.cookies.id);
-    	// Use the 'User' static 'findOne' method to retrieve a specific user
-	quote.findOne({
-        Patients: id
-	}, (err, quote) => {
-		if (err) {
-			// Call the next middleware with an error message
-			return next(err);
-		} else {
-			// Set the 'req.user' property
-            req.quote = quote;
-            console.log(quote);
-			// Call the next middleware
-			next();
-		}
-	});
+exports.listQuote = function (req, res) {
 
 
+
+    quote.find({}).populate({
+        path: 'Patients',
+        match: {'_id': mongo.Types.ObjectId(req.cookies.id)}
+    }).exec(function (err, test) {
+        console.log(test)
+        
+        res.send(test[test.length - 1].message);
+    });
+
+  
 
 };

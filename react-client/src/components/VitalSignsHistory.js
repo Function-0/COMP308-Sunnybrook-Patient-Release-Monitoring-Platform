@@ -14,6 +14,7 @@ function VitalSignsHistory(props) {
   const [listError, setListError] = useState(false);
   const apiUrl = "/vitalsigns";
   const [patientName, setPatientName] = useState('');
+  const [newData, setNewData] = useState([]);
 
 
   useEffect(() => {
@@ -41,17 +42,28 @@ function VitalSignsHistory(props) {
   const onChange = (e) => {
     console.log(e);
     e.persist();
+    let enteredName = e.target.value;
     console.log(e.target.value);
     setPatientName(e.target.value);
     console.log(data);
-    // getDataByUser(patientName)
+
+
+    var result = data.filter(item => item.PatientUserName.includes(enteredName));
+    console.log(result)
+
+    if (result) {
+      setNewData(result)
+      }else{
+        setNewData(data)
+      }
+ 
   };
 
   const getDataByUser = (e) => {
       let array = data.find();
       console.log(data);
   }
-
+    
   return (
     <div>
       <div>
@@ -77,6 +89,7 @@ function VitalSignsHistory(props) {
 
             />
         </Form.Group>
+        
       </Form>
       <h4>username is {patientName} </h4>
         <Table striped bordered hover>
@@ -94,7 +107,7 @@ function VitalSignsHistory(props) {
           <tbody>
         
             
-            {data.map((item, idx) => (
+            {newData.map((item, idx) => (
             <tr>
              <td>{item.created}</td>
              <td>{item.heartRate}</td>

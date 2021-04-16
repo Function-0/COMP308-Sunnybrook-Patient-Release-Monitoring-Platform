@@ -12,9 +12,9 @@ const jwtKey =config.secretKey;
 
 exports.createVitalSign = function (req, res, next) {
 
-    // Create a new instance of the 'User' Mongoose model
+    //Create a new instance of the 'User' Mongoose model
     var vitalsigns = new vitalSign(req.body); //get data from React form
-    console.log("body: " + req.body.username);
+    console.log("body: " + req.body);
 
     // Use the 'User' instance's 'save' method to save a new user document
     vitalsigns.save(function (err) {
@@ -27,6 +27,7 @@ exports.createVitalSign = function (req, res, next) {
             
         }
     });
+
 };
 
 exports.createQuote = function (req, res, next) {

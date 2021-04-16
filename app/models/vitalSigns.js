@@ -39,6 +39,10 @@ const vitalSignsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Patients'
     },
+    PatientUserName: {
+        type: String,
+        trim: true
+    },
     Nurses: {
         type: Schema.Types.ObjectId,
         ref: 'Nurse'

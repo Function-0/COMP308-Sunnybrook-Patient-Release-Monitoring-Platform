@@ -8,6 +8,7 @@ module.exports = function (app) {
     app.get('/listpatients', patients.listPatients);
     app.get('/getquote', patients.listQuote)
     app.post('/makealert', patients.createAlert)
+    app.post('/predicthepatitis', patients.predictHepatitis);
 
 };
 

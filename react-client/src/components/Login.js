@@ -60,14 +60,14 @@ function App(props) {
       //call api
       const res = await axios.post(apiUrl2, loginData);
       console.log(res.data.auth)
-      if(res.data.screen2 == null){
+      if(res.data.screen == null){
         window.alert("Incorrect Login");
       }
-      console.log(res.data.screen2)
+      console.log(res.data.screen)
       //process the response
-      if (res.data.screen2 !== undefined) {
-        setScreens(res.data.screen2);
-        console.log(res.data.screen2);
+      if (res.data.screen !== undefined) {
+        setScreens(res.data.screen);
+        console.log(res.data.screen);
       }
     } catch (e) { //print the error
       console.log(e);

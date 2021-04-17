@@ -4,11 +4,12 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
 import { withRouter } from 'react-router-dom';
 import Login from './Login';
+import Table from 'react-bootstrap/Table';
 
-function ListArticles(props) {
+function ListDailyInfos(props) {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
-  const apiUrl = "/api/articles";
+  const apiUrl = "/api/showdailyInfos";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +33,7 @@ function ListArticles(props) {
 
   const showDetail = (id) => {
     props.history.push({
-      pathname: '/showarticle/' + id
+      pathname: '/showdailyInfos/' + id
     });
   }
 
@@ -43,11 +44,62 @@ function ListArticles(props) {
           {showLoading && <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner> }
-          <ListGroup>
+          <Table striped bordered hover>
+
+          <thead>
+
+            <tr>
+
+            <th>Created Time</th>
+
+              <th>Heart Rate</th>
+
+              <th>Systolic Blood Pressure</th>
+
+              <th>Diastolic Blood Pressure</th>
+
+              <th>Weight</th>
+
+              <th>Temperature</th>
+
+              <th>Respitory Rate</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+        
+
+            
+
             {data.map((item, idx) => (
-              <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}>{item.title}</ListGroup.Item>
+
+            <tr>
+
+             <td>{item.created}</td>
+
+             <td>{item.heartRate}</td>
+
+             <td>{item.SBP}</td>
+
+             <td>{item.DBP}</td>
+
+             <td>{item.weight}</td>
+
+             <td>{item.temperature}</td>
+
+             <td>{item.respiratoryRate}</td>
+
+             </tr>
+
             ))}
-          </ListGroup>
+
+
+          </tbody>
+
+        </Table>
         </div>
         : < Login />
       }
@@ -56,4 +108,4 @@ function ListArticles(props) {
   );
 }
 //
-export default withRouter(ListArticles);
+export default withRouter(ListDailyInfos);

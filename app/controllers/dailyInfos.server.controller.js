@@ -3,6 +3,7 @@ const patientRoutes = require('../routes/patient.routes');
 const DailyInfos = mongoose.model('dailyInfos');
 const User = require('mongoose').model('User');
 const Patient = require ('mongoose').model("Patients");
+const mongo = require('mongoose');
 
 //
 function getErrorMessage(err) {
@@ -41,7 +42,7 @@ exports.addDailyInfos = function (req, res) {
                 dailyInfos.temperature = req.body.temperature;
                 dailyInfos.respiratoryRate = req.body.respiratoryRate;
 
-                dailyInfos.Patients = patient;
+                dailyInfos.Patients = mongo.Types.ObjectId(patientId);
 
                 dailyInfos.save((err) => {
                     if (err) {

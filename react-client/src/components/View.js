@@ -1,7 +1,9 @@
-import CreateArticle from './CreateArticle';
 import CreateAlert from './CreateAlert';
+import AddMyDailyInfos from './AddMyDailyInfos';
+import ListDailyInfos from './ListDailyInfos';
+
+
 import React, { useState } from 'react';
-import dailyInfos from './ListDailyInfos'
 //
 import axios from 'axios';
 //
@@ -10,8 +12,8 @@ function View (props) {
   const { screen, setScreen } = props;
   // return a stateful value and funcion to update it
   const [data, setData] = useState();
-  
-  const [dailyInfos, setDailyInfos] = useState('');
+  //
+  const [article, setArticle] = useState('');
   // called when user clicks on Logout button
   // to clear the cookie and set the screen state variable 
   // back to its initial state.
@@ -36,16 +38,16 @@ function View (props) {
     }
   }
   //
-  const listDailyInfos = (username) => {
+  const listArticles = (username) => {
 
-    console.log('in listDailyInfos: ',username)
-    setDailyInfos('n')
+    console.log('in listCourses: ',username)
+    //setArticle('n')
 
   }
   //
-  const addMyDailyInfos = () => {
-    console.log('in addMyDailyInfos')
-    setDailyInfos('y')
+  const createArticle = () => {
+    console.log('in createCourse')
+    setArticle('y')
 
   }
 
@@ -57,6 +59,14 @@ function View (props) {
     setArticle('alert')
   }
   
+  
+  const createDaily = () => {
+    setArticle('info')
+  }
+
+  const listDaily = () => {
+    setArticle('list')
+  }
   //
   return (
     <div className="App">
@@ -69,13 +79,20 @@ function View (props) {
             <button onClick={createAlert}>Create Alert</button>
             <button onClick={deleteCookie}>Log out</button>
             <button onClick={motivationVideo}>Motivation Video</button>
+            <button onClick={createDaily}>Create Daily Info</button>
+            <button onClick={listDaily}>List Daily Info</button>
+
+
           </div>   
-      {article === 'y' &&    
-       <CreateArticle screen={screen} setScreen={setScreen} />
+      {article === 'info' &&    
+       <AddMyDailyInfos screen={screen} setScreen={setScreen} />
         }
-        {article === 'alert' &&
+        {article === 'list' &&    
+       <ListDailyInfos screen={screen} setScreen={setScreen} />
+        }
+        {/* {article === 'alert' &&
        <CreateAlert screen={screen} setScreen={setScreen} />
-        }
+        } */}
     </div>
   );
 }

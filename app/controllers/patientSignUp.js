@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
 const jwtExpirySeconds = 300;
 const jwtKey =config.secretKey;
-
+const dailyInfo = mongoose.model('dailyInfos');
+const mongo = require('mongoose');
 //
 // Create a new error handling controller method
 const getErrorMessage = function(err) {
@@ -56,13 +57,48 @@ exports.create = function (req, res, next) {
 // Returns all users
 exports.list = function (req, res, next) {
     // Use the 'User' instance's 'find' method to retrieve a new user document
-    Patient.find({}, function (err, users) {
-        if (err) {
+    console.log(req.cookies.id);
+	console.log("---------------------")
+
+
+	dailyInfo.find({
+		Patients: mongo.Types.ObjectId(req.cookies.id)
+	}, (err, pat) => {
+		if (err) {
+            // Call the next middleware with an error message
             return next(err);
         } else {
-            res.json(users);
+            // Use the 'response' object to send a JSON response
+			console.log("---------------------")
+
+			console.log(pat)
+            res.send(pat);
+            
         }
-    });
+	});
+
+	// dailyInfo.find({}).populate({
+    //     path: 'Patients',
+    //     match: {'_id': mongo.Types.ObjectId(req.cookies.id)}
+
+    // }).exec(function (err, test) {
+    //     console.log("---------------------")
+
+    //     console.log(test)
+
+	// 	console.log("---------------------")
+
+    //     res.send(test);
+
+    // });
+
+	// Patient.find({}, function (err, users) {
+    //     if (err) {
+    //         return next(err);
+    //     } else {
+    //         res.json(users);
+    //     }
+    // });
 };
 //
 //'read' controller method to display a user

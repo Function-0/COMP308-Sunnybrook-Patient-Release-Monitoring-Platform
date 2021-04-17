@@ -18,8 +18,6 @@ import EditArticle from './components/EditArticle';
 import CreateUser from './components/CreatePatient';
 import CreateNurse from './components/CreateNurse'
 import ShowUser from './components/ShowUser';
-import ShowArticle from './components/ShowArticle';
-import ListArticles from "./components/ListArticles";
 import showNurse from "./components/showNurse";
 import NurseLanding from "./components/NurseLandingPage";
 import View from "./components/View";
@@ -43,9 +41,9 @@ function App() {
       </Navbar>
     
       <div>          
-          <Route render ={()=> < Home />} path="/" />
+           <Route render ={()=> < Home />} path="/" />
           <Route render ={()=> < Login />} path="/login" />
-          <Route render ={()=> < List />} path="/list" />
+          {/* <Route render ={()=> < List />} path="/list" />
           <Route render={() => <ListArticles />} path="/listarticles" />
           <Route render={()=> <View />} path="/view"/>
           <Route render ={()=> < EditUser />} path="/edit/:id" />
@@ -53,10 +51,10 @@ function App() {
           <Route render ={()=> < CreateNurse />} path="/createNurse" />
           <Route render ={()=> < ShowUser />} path="/show/:id" />
           <Route render ={()=> < ShowDailyInfos/>} path="/showdailyInfos/:id" />
-          <Route render ={()=> < showNurse />} path="/showNurse/:id" />
+          <Route render ={()=> < showNurse />} path="/showNurse/:id" /> */}
           {/* <Route render ={()=> < ShowArticle />} path="/showarticle/:id" /> */}
-          <Route render ={()=> < EditArticle />} path="/editarticle/:id" />
-          <Route render={()=><NurseLanding />} path ="/Nurselanding"/>
+          {/* <Route render ={()=> < EditArticle />} path="/editarticle/:id" />
+          <Route render={()=><NurseLanding />} path ="/Nurselanding"/>  */}
 
       </div>
 

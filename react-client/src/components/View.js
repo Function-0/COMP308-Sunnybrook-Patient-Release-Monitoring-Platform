@@ -64,10 +64,10 @@ function View (props) {
             <p>{screen}</p>
             <p>{data}</p>
             <button onClick={verifyCookie}>Verify Cookie</button>
-            <button onClick={createArticle}>Create Artivle</button>
-            <button onClick={createAlert}>Create Alert</button>
-            <button onClick={deleteCookie}>Log out</button>
+            {/* <button onClick={createArticle}>Create Artivle</button> */}
+            <button onClick={createAlert}>Create Emergency Alert</button>            
             <button onClick={motivationVideo}>Motivation Video</button>
+            <button onClick={deleteCookie}>Log out</button>
           </div>   
       {article === 'y' &&    
        <CreateArticle screen={screen} setScreen={setScreen} />

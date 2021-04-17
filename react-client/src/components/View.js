@@ -2,6 +2,7 @@ import CreateAlert from './CreateAlert';
 import AddMyDailyInfos from './AddMyDailyInfos';
 import ListDailyInfos from './ListDailyInfos';
 import ViewQuote from "./ViewQuote";
+import PredictHepatitis from "./PredictHepatitis";
 
 
 import MotivationVideo from './MotivationVideo';
@@ -73,6 +74,10 @@ function View (props) {
   const viewQuote = () => {
     setArticle("view");
   };
+
+  const predict = () => {
+    setArticle("predict");
+  };
   //
   return (
     <div className="App">
@@ -87,6 +92,7 @@ function View (props) {
             <button onClick={createDaily}>Create Daily Info</button>
             <button onClick={listDaily}>List Daily Info</button>
             <button onClick={viewQuote}>View Quote</button>
+            <button onClick={predict}>Predict Hepatitis</button>
 
 
           </div>   
@@ -104,6 +110,9 @@ function View (props) {
        <MotivationVideo screen={screen} setScreen={setScreen} />
         }{article === "view" && (
           <ViewQuote screen={screen} setScreen={setScreen} />
+        )}
+        {article === "predict" && (
+          <PredictHepatitis screen={screen} setScreen={setScreen} />
         )}
          
     </div>

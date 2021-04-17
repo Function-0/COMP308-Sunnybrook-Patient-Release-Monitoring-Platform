@@ -1,5 +1,5 @@
-﻿// Load the module dependencies
-const User = require('mongoose').model('User');
+const mongoose = require("mongoose");
+const Patient = mongoose.model('Patients');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
@@ -37,7 +37,7 @@ const getErrorMessage = function(err) {
 // Create a new user
 exports.create = function (req, res, next) {
     // Create a new instance of the 'User' Mongoose model
-    var user = new User(req.body); //get data from React form
+    var user = new Patient(req.body); //get data from React form
     console.log("body: " + req.body.username);
 
     // Use the 'User' instance's 'save' method to save a new user document
@@ -56,7 +56,7 @@ exports.create = function (req, res, next) {
 // Returns all users
 exports.list = function (req, res, next) {
     // Use the 'User' instance's 'find' method to retrieve a new user document
-    User.find({}, function (err, users) {
+    Patient.find({}, function (err, users) {
         if (err) {
             return next(err);
         } else {
@@ -74,7 +74,7 @@ exports.read = function(req, res) {
 // 'userByID' controller method to find a user by its id
 exports.userByID = function (req, res, next, id) {
 	// Use the 'User' static 'findOne' method to retrieve a specific user
-	User.findOne({
+	Patient.findOne({
         _id: id
 	}, (err, user) => {
 		if (err) {
@@ -92,7 +92,7 @@ exports.userByID = function (req, res, next, id) {
 //update a user by id
 exports.update = function(req, res, next) {
     console.log(req.body);
-    User.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
+    Patient.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
       if (err) {
         console.log(err);
         return next(err);
@@ -102,7 +102,7 @@ exports.update = function(req, res, next) {
 };
 // delete a user by id
 exports.delete = function(req, res, next) {
-    User.findByIdAndRemove(req.user.id, req.body, function (err, user) {
+    Patient.findByIdAndRemove(req.user.id, req.body, function (err, user) {
       if (err) return next(err);
       res.json(user);
     });
@@ -117,7 +117,8 @@ exports.authenticate = function(req, res, next) {
 	console.log(password)
 	console.log(username)
 	//find the user with given username using static method findOne
-	User.findOne({username: username}, (err, user) => {
+	
+	Patient.findOne({username: username}, (err, user) => {
 			if (err) {
 				next(err);
 			} else {
@@ -132,7 +133,7 @@ exports.authenticate = function(req, res, next) {
 				// set the cookie as the token string, with a similar max age as the token
 				// here, the max age is in milliseconds
 				res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000,httpOnly: true});
-				res.status(200).send({ screen: user.username });
+				res.status(200).send({ screen2: user.username });
 				//
 				//res.json({status:"success", message: "user found!!!", data:{user:
 				//user, token:token}});
@@ -199,7 +200,7 @@ exports.isSignedIn = (req, res) => {
 	console.log(token)
 	// if the cookie is not set, return 'auth'
 	if (!token) {
-	  return res.send({ screen: 'auth' }).end();
+	  return res.send({ screen2: 'auth2' }).end();
 	}
 	var payload;
 	try {
@@ -218,7 +219,7 @@ exports.isSignedIn = (req, res) => {
 	}
   
 	// Finally, token is ok, return the username given in the token
-	res.status(200).send({ screen: payload.username });
+	res.status(200).send({ screen2: payload.username });
 }
 
 //isAuthenticated() method to check whether a user is currently authenticated

@@ -9,7 +9,7 @@ function List(props) {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
   const [listError, setListError] = useState(false);
-  const apiUrl = "/users";
+  const apiUrl = "/Nurses";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +19,6 @@ function List(props) {
           //check if the user has logged in
           if(result.data.screen !== 'auth')
           {
-            
             console.log('data in if:', result.data )
             setData(result.data);
             setShowLoading(false);
@@ -40,7 +39,7 @@ function List(props) {
 
   return (
     <div>
-      { data.length !== 0
+      { data.length > 0
         ? <div>
           {showLoading && <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>

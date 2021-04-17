@@ -1,8 +1,10 @@
 # Sunnybrook Patient Release Monitoring Platform
 
+The Sunnybrook Patient Release Monitoring Platform is live on this URL: https://comp308-sunnybrook.herokuapp.com/
+
 This is an application designed to help nurse practitioners to monitor patients during the first weeks of their release from the hospital and also to help the patients to monitor their daily activities.
 
-## Sunnybrook Patient Release Monitoring Platform Team - 1
+## Sunnybrook Patient Release Monitoring Platform Team
 
 The Sunnybrook Patient Release Monitoring Platform team is as follows:
 - Michael Asemota:
@@ -28,7 +30,7 @@ The Sunnybrook Patient Release Monitoring Platform team is as follows:
 
 ## MongoDB Schema
 
-![image](https://user-images.githubusercontent.com/30096267/114326345-5d26dd00-9b02-11eb-9501-4b226ad418c5.png)
+![image](https://user-images.githubusercontent.com/30096267/114753529-8c696400-9d25-11eb-816d-31516e0cdf3d.png)
 
 ## Figma UI Prototype
 

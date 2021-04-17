@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 function ShowUser(props) {
   const [data, setData] = useState({});
   const [showLoading, setShowLoading] = useState(true);
-  const apiUrl = "/patients/" + props.match.params.id;
+  const apiUrl = "/Nurses/" + props.match.params.id;
 
   useEffect(() => {
     setShowLoading(false);

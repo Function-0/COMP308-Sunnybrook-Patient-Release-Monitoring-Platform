@@ -42,13 +42,13 @@ function App() {
     
       <div>          
            <Route render ={()=> < Home />} path="/" />
-          <Route render ={()=> < Login />} path="/login" />
+           <Route render ={()=> < Login />} path="/login" />
+           <Route render ={()=> < CreateUser />} path="/create" />
+           <Route render ={()=> < CreateNurse />} path="/createNurse" />
           {/* <Route render ={()=> < List />} path="/list" />
           <Route render={() => <ListArticles />} path="/listarticles" />
           <Route render={()=> <View />} path="/view"/>
           <Route render ={()=> < EditUser />} path="/edit/:id" />
-          <Route render ={()=> < CreateUser />} path="/create" />
-          <Route render ={()=> < CreateNurse />} path="/createNurse" />
           <Route render ={()=> < ShowUser />} path="/show/:id" />
           <Route render ={()=> < ShowDailyInfos/>} path="/showdailyInfos/:id" />
           <Route render ={()=> < showNurse />} path="/showNurse/:id" /> */}

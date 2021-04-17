@@ -19,6 +19,7 @@ import CreateUser from './components/CreatePatient';
 import CreateNurse from './components/CreateNurse'
 import ShowUser from './components/ShowUser';
 import ShowArticle from './components/ShowArticle';
+import ShowAlert from './components/ShowAlert';
 import ListArticles from "./components/ListArticles";
 import showNurse from "./components/showNurse";
 import NurseLanding from "./components/NurseLandingPage";
@@ -54,6 +55,7 @@ function App() {
           <Route render ={()=> < ShowUser />} path="/show/:id" />
           <Route render ={()=> < showNurse />} path="/showNurse/:id" />
           <Route render ={()=> < ShowArticle />} path="/showarticle/:id" />
+          <Route render ={()=> < ShowAlert  />} path="/showalert/:id" />
           <Route render ={()=> < EditArticle />} path="/editarticle/:id" />
           <Route render={()=><NurseLanding />} path ="/Nurselanding"/>
 

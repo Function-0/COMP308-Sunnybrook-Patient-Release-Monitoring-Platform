@@ -9,11 +9,12 @@ const jwtKey =config.secretKey;
 const quote = require('mongoose').model('dailyTips');
 const mongo = require('mongoose')
 const alerts = require('mongoose').model('Alerts');
-const tf = require('@tensorflow/tfjs');
-const path = require('path');
-require('@tensorflow/tfjs-node');
+
 
 exports.predictHepatitis = async function (req, res) {
+    const tf = require('@tensorflow/tfjs');
+    const path = require('path');
+    require('@tensorflow/tfjs-node');
     try {
         console.log(req.body);
 

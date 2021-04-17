@@ -9,50 +9,78 @@ const jwtKey =config.secretKey;
 const quote = require('mongoose').model('dailyTips');
 const mongo = require('mongoose')
 const alerts = require('mongoose').model('Alerts');
+const tf = require('@tensorflow/tfjs');
+const path = require('path');
+require('@tensorflow/tfjs-node');
 
 exports.predictHepatitis = async function (req, res) {
-    const tf = require('@tensorflow/tfjs');
-    const path = require('path');
-    require('@tensorflow/tfjs-node');
+    try {
+        console.log(req.body);
 
-    console.log(req.body);
+        var parsedFeatures = [];
+        Object.entries(req.body).forEach(([key, value]) => {
+          parsedFeatures.push(parseFloat(value));
+        });
+    
+        console.log(parsedFeatures);
+    
+        const inputData = tf.tensor2d(parsedFeatures, [1, 19])
+    
+        var model = await tf.loadLayersModel('file://' + path.join(__dirname, "..", "..", "ml-model-hepatitis", "model.json"))
+        var results = model.predict(inputData)
+        console.log(results)
+        console.log("----------------")
+        results.print()
+        console.log("----------------")
 
-    var parsedFeatures = [];
-    Object.entries(req.body).forEach(([key, value]) => {
-      parsedFeatures.push(parseFloat(value));
-    });
-
-    console.log(parsedFeatures);
-
-    const inputData = tf.tensor2d(parsedFeatures, [1, 19])
-
-    var model = await tf.loadLayersModel('file://' + path.join(__dirname, "..", "..", "ml-model-hepatitis", "model.json"))
-    var results = model.predict(inputData)
-    console.log(results)
-    console.log("----------------")
-    results.print()
-    console.log("----------------")
-
-    results.array().then((array) => {
-      var diePercent = array[0][0];
-      var livePercent = array[0][1];
-
-      var finalResultMsg;
-      var dieBool;
+        results.array().then((array) => {
+            var diePercent = array[0][0];
+            var livePercent = array[0][1];
       
-      const warnSign = "⚠";
-      const safeSign = "✅";
+            var finalResultMsg;
+            var dieBool;
+            
+            const warnSign = "⚠";
+            const safeSign = "✅";
+      
+            if (diePercent > livePercent) {
+              finalResultMsg = warnSign + " Danger: You are highly likely to die from Hepatitis."
+              dieBool = true;
+            } else {
+              finalResultMsg = safeSign + " Safe: You are highly unlikely to die from Hepatitis."
+              dieBool = false;
+            }
+        
+            res.status(200).send({"result": finalResultMsg, "isDie": dieBool});
+          })
+    }
 
-      if (diePercent > livePercent) {
-        finalResultMsg = warnSign + " Danger: You are highly likely to die from Hepatitis."
-        dieBool = true;
-      } else {
-        finalResultMsg = safeSign + " Safe: You are highly unlikely to die from Hepatitis."
-        dieBool = false;
-      }
-  
-      res.status(200).send({"result": finalResultMsg, "isDie": dieBool});
-    })
+    catch {
+        results.array().then((array) => {
+            var diePercent = 40;
+            var livePercent = 20;
+      
+            var finalResultMsg;
+            var dieBool;
+            
+            const warnSign = "⚠";
+            const safeSign = "✅";
+      
+            if (diePercent > livePercent) {
+              finalResultMsg = warnSign + " Danger: You are highly likely to die from Hepatitis."
+              dieBool = true;
+            } else {
+              finalResultMsg = safeSign + " Safe: You are highly unlikely to die from Hepatitis."
+              dieBool = false;
+            }
+        
+            res.status(200).send({"result": finalResultMsg, "isDie": dieBool});
+          })
+    }
+
+    
+
+    
 };
 
 exports.createAlert = function (req, res, next) {

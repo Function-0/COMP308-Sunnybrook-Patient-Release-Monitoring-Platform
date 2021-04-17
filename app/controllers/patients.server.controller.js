@@ -27,7 +27,9 @@ exports.predictHepatitis = async function (req, res) {
     
         const inputData = tf.tensor2d(parsedFeatures, [1, 19])
     
-        var model = await tf.loadLayersModel('file://' + path.join(__dirname, "..", "..", "ml-model-hepatitis", "model.json"))
+        var devHost = 'file://';
+        var prodHost = 'http://';
+        var model = await tf.loadLayersModel(prodHost + path.join(__dirname, "..", "..", "ml-model-hepatitis", "model.json"))
         var results = model.predict(inputData)
         console.log(results)
         console.log("----------------")

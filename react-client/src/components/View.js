@@ -1,6 +1,7 @@
 import CreateAlert from './CreateAlert';
 import AddMyDailyInfos from './AddMyDailyInfos';
 import ListDailyInfos from './ListDailyInfos';
+import ViewQuote from "./ViewQuote";
 
 
 import MotivationVideo from './MotivationVideo';
@@ -68,6 +69,10 @@ function View (props) {
   const listDaily = () => {
     setArticle('list')
   }
+
+  const viewQuote = () => {
+    setArticle("view");
+  };
   //
   return (
     <div className="App">
@@ -75,13 +80,13 @@ function View (props) {
      <div>
             <p>{screen}</p>
             <p>{data}</p>
-            <button onClick={verifyCookie}>Verify Cookie</button>
-            {/* <button onClick={createArticle}>Create Artivle</button> */}
+
             <button onClick={createAlert}>Create Alert</button>
             <button onClick={deleteCookie}>Log out</button>
-            <button onClick={motivationVideo}>Motivation Video</button>
+            <button onClick={motivationVideo}>Motivation Video And Games</button>
             <button onClick={createDaily}>Create Daily Info</button>
             <button onClick={listDaily}>List Daily Info</button>
+            <button onClick={viewQuote}>View Quote</button>
 
 
           </div>   
@@ -91,13 +96,16 @@ function View (props) {
         {article === 'list' &&    
        <ListDailyInfos screen={screen} setScreen={setScreen} />
         }
-        {/* {article === 'alert' &&
+        {article === 'alert' &&
        <CreateAlert screen={screen} setScreen={setScreen} />
-        } */}
         }
+        
          {article === 'video' &&
        <MotivationVideo screen={screen} setScreen={setScreen} />
-        }
+        }{article === "view" && (
+          <ViewQuote screen={screen} setScreen={setScreen} />
+        )}
+         
     </div>
   );
 }

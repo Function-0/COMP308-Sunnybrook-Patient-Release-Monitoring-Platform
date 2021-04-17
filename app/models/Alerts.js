@@ -11,7 +11,7 @@ const AlertsSchema = new Schema({
         required: "Message is required",
         trim: true
     },
-    account: {
+    Patients: {
         type: Schema.Types.ObjectId,
         ref: 'Patients'
     }

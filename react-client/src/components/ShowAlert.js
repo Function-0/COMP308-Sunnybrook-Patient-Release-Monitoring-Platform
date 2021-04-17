@@ -4,59 +4,104 @@ import Spinner from 'react-bootstrap/Spinner';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
+import Table from 'react-bootstrap/Table';
 
-function ShowArticle(props) {
-  console.log('props.match.params',props.match.params.id)
-  const [data, setData] = useState({});
+
+function ShowAlert(props) {
+  const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
-  const apiUrl = "/api/articles/" + props.match.params.id;
+  const [listError, setListError] = useState(false);
+  const apiUrl = "/getalerts";
+
 
   useEffect(() => {
-    setShowLoading(false);
     const fetchData = async () => {
-      const result = await axios(apiUrl);
-      console.log('results from articles',result.data);
-
-      setData(result.data);
-      setShowLoading(false);
+      axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log("result.data:", result.data);
+          //check if the user has logged in
+          if (result.data.screen !== "auth") {
+            console.log("data in if:", result.data);
+            setData(result.data);
+            setShowLoading(false);
+          }
+        })
+        .catch((error) => {
+          console.log("error in fetchData:", error);
+          setListError(true);
+        });
     };
-
     fetchData();
   }, []);
 
-  const editArticle = (id) => {
-    props.history.push({
-      pathname: '/editarticle/' + id
-    });
-  };
+  // const editArticle = (id) => {
+  //   props.history.push({
+  //     pathname: '/editarticle/' + id
+  //   });
+  // };
 
-  const deleteArticle = (id) => {
-    setShowLoading(true);
-    const article = { title: data.title, content: data.content };
-    //
-    axios.delete(apiUrl, article)
-      .then((result) => {
-        setShowLoading(false);
-        props.history.push('/listarticles')
-      }).catch((error) => setShowLoading(false));
-  };
+  // const deleteArticle = (id) => {
+  //   setShowLoading(true);
+  //   const article = { title: data.title, content: data.content };
+  //   //
+  //   axios.delete(apiUrl, article)
+  //     .then((result) => {
+  //       setShowLoading(false);
+  //       props.history.push('/listarticles')
+  //     }).catch((error) => setShowLoading(false));
+  // };
 
   return (
     <div>
-      {showLoading && <Spinner animation="border" role="status">
-        <span className="sr-only">Loading...</span>
-      </Spinner> }    
+         
       <Jumbotron>
-        <h1>Emergency Alert: {data.title}</h1>
-        <p>Alert details: {data.content}</p>
-
-        <p>
-          <Button type="button" variant="primary" onClick={() => { editArticle(data._id) }}>Edit</Button>&nbsp;
-          <Button type="button" variant="danger" onClick={() => { deleteArticle(data._id) }}>Delete</Button>
-        </p>
+        <h1>Emergency Alert: </h1>
+        <p>Alert details: </p>
       </Jumbotron>
+
+      <Table striped bordered hover>
+
+          <thead>
+
+            <tr>
+
+            <th>Created Time</th>
+
+              <th>Message</th>
+
+              <th>UserName</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+        
+
+            
+
+            {data.map((item, idx) => (
+
+            <tr>
+
+             <td>{item.created}</td>
+
+             <td>{item.message}</td>
+              
+              <td>{item.Patients.username}</td>
+             </tr>
+
+            ))}
+
+            
+
+          </tbody>
+
+        </Table>
     </div>
   );
 }
 
-export default withRouter(ShowArticle);
+export default withRouter(ShowAlert);

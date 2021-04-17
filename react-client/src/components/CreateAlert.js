@@ -41,19 +41,12 @@ function CreateAlert(props) {
     return (
         <div>
         <h2> Create an alert message {username} </h2>
-        {showLoading && 
-            <Spinner animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-            </Spinner> 
-        } 
+        
         <Jumbotron>
             <Form onSubmit={saveArticle}>
+              
               <Form.Group>
-                <Form.Label> Alert Message</Form.Label>
-                <Form.Control type="text" name="title" id="title" placeholder="Enter message" value={article.title} onChange={onChange} />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label> Enter Details </Form.Label>
+                <Form.Label> Enter Alert Message </Form.Label>
                 <Form.Control as="textarea" rows="3" name="message" id="content" placeholder="Enter details" value={article.content} onChange={onChange} />
               </Form.Group>
                             

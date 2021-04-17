@@ -1,11 +1,11 @@
 import { useParams, withRouter } from "react-router-dom";
 import React, { useState } from "react";
-import AddQuote from "./AddQuote";
 import AddVitals from "./AddVitals";
 import VitalSignsHistory from "./VitalSignsHistory";
-import ViewQuote from "./ViewQuote";
+import AddQuote from "./AddQuote";
 
 import axios from 'axios';
+import ShowAlert from "./ShowAlert";
 
 
 function NurseLandingPage(props) {
@@ -25,9 +25,7 @@ function NurseLandingPage(props) {
     setArticle("history");
   };
 
-  const viewQuote = () => {
-    setArticle("view");
-  };
+
 
   const viewAlert = () => {
     setArticle("alert");
@@ -51,24 +49,22 @@ function NurseLandingPage(props) {
         <button onClick={addQuote}>Add Daily Quote</button>
         <button onClick={addVitals}>Add Vitals</button>
         <button onClick={vitalHistory}>Vital Signs History</button>       
-        <button onClick={viewQuote}>View Quote</button>
         <button onClick={viewAlert}>Show Emergency Alert</button>
         <button onClick={deleteCookie}>Log out</button>
 
       </div>
 
-      {article === "quote" && (
-        <AddQuote screen={screen} setScreen={setScreen} />
-      )}
+     
       {article === "vitals" && (
         <AddVitals screen={screen} setScreen={setScreen} />
       )}
       {article === "history" && (
         <VitalSignsHistory screen={screen} setScreen={setScreen} />
-      )}{article === "view" && (
-        <ViewQuote screen={screen} setScreen={setScreen} />
-      )}{article === "viewAlert" && (
-        <ViewQuote screen={screen} setScreen={setScreen} />
+      )}{article === "alert" && (
+        <ShowAlert screen={screen} setScreen={setScreen} />
+      )}
+      {article === "quote" && (
+        <AddQuote screen={screen} setScreen={setScreen} />
       )}
    
     </div>

@@ -8,42 +8,38 @@ const jwtExpirySeconds = 300;
 const jwtKey =config.secretKey;
 const quote = require('mongoose').model('dailyTips');
 const mongo = require('mongoose')
+const alerts = require('mongoose').model('Alerts');
+
 
 exports.createAlert = function (req, res, next) {
 
-    // Create a new instance of the 'User' Mongoose model
-    var dailyQuote = new quote(); //get data from React form
-    console.log(req.body.id);
-    Patients.findById(req.body.id, (err, patient) => {
-        if (err) {
-            return res.status(500).send(err).end();
-        } else {
-            if (patient) {
-                dailyQuote.Patients = patient;
-                dailyQuote.message = req.body.message;
-                dailyQuote.save((err, pract) => {
-
-                    if (err) {
-
-                        return res.status(500).send({
-
-                            message: "There was an Error Creating the practitioner.",
-
-                            err: err
-
-                        }).end();
-
-                    } 
-
-                        
-
-                    
-
-                });
-
-            }
-
-        }})
+     // Create a new instance of the 'User' Mongoose model
+     var newAlert = new alerts(); //get data from React form
+     console.log(req.cookies.id);
+ 
+ 
+     Patients.findById(req.cookies.id, (err, alert1) => {
+         if (err) {
+             return res.status(500).send(err).end();
+         } else {
+             if (alert1) {
+               console.log(alert1);
+                newAlert.Patients = mongo.Types.ObjectId(req.cookies.id);
+                newAlert.message = req.body.message;
+ 
+                
+                newAlert.save((err) => {
+                     if (err) {
+                         return res.status(500).send({
+                             message: "There was an Error Creating the practitioner.",
+                             err: err
+                         }).end();
+                     } 
+                         
+                     
+                 });
+             }
+         }})
 
     }
 
